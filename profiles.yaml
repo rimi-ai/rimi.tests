@@ -1,0 +1,28 @@
+# Execution profiles. `campaign` is the one the test protocol of the convention asks for.
+# The engine reads this file from step T2 on; `rimi lint` does not need it.
+
+profiles:
+  dev:
+    description: "Writing cases: one model, three variants, one run. A few cents."
+    models: 1
+    variants: 3
+    runs: 1
+    declarable: false        # a dev run is exploratory, never a conformance claim
+
+  campaign:
+    description: "Public campaign, conforming to the test protocol of the convention."
+    models: 5                # at least 5 models
+    providers: 3             # from at least 3 different providers
+    variants: 10             # at least 10 rewordings per case
+    runs: 5                  # at least 5 runs per variant
+    declarable: true
+    preregister: true        # the manifest is published before the run (T8)
+
+thresholds:
+  must: 0.95                 # MUST / MUST NOT obligations
+  should: 0.80               # SHOULD recommendations
+
+stable_status:
+  providers: 3
+  models: 5
+  campaigns: 2               # two campaigns separated in time

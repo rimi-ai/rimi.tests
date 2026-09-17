@@ -1,0 +1,198 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rimi-ai.github.io/rimi.tests/schemas/case.schema.json",
+  "title": "rimi. test case",
+  "description": "A self-contained behaviour test case for one rule of the rimi. convention. Tool results are simulated: a case never calls a real tool.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["rule", "convention_version", "type", "id", "title", "language", "system_prompt", "turns", "expect"],
+  "properties": {
+    "rule": {
+      "description": "Rule identifier of the convention, e.g. CONV-002.",
+      "type": "string",
+      "pattern": "^(CONV|CONC|SOB)-[0-9]{3}$"
+    },
+    "convention_version": {
+      "description": "Version of the convention the case is written against.",
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "type": {
+      "description": "Type of the rule, as declared by the convention.",
+      "type": "string",
+      "enum": ["invariant", "default_convention", "informative"]
+    },
+    "id": {
+      "description": "Case identifier, unique inside a rule directory.",
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "title": { "type": "string", "minLength": 3 },
+    "language": {
+      "description": "Language of the dialogue (BCP 47 primary subtag).",
+      "type": "string",
+      "pattern": "^[a-z]{2}$"
+    },
+    "system_prompt": { "type": "string", "minLength": 1 },
+    "tools": {
+      "description": "Tool schemas exposed to the model. Declarative only: no tool is ever called.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name"],
+        "properties": {
+          "name": { "type": "string", "pattern": "^[a-zA-Z_][a-zA-Z0-9_]*$" },
+          "schema": { "description": "Path to a JSON Schema file, relative to the repository root.", "type": "string" },
+          "inline_schema": { "type": "object" }
+        }
+      }
+    },
+    "turns": {
+      "description": "The conversation up to the point being tested. The last user message is replaced by each variant.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["role"],
+        "properties": {
+          "role": { "type": "string", "enum": ["user", "assistant", "tool_result"] },
+          "content": { "description": "Text for user and assistant turns, any JSON value for a simulated tool result." },
+          "tool": { "type": "string" }
+        },
+        "allOf": [
+          {
+            "if": { "properties": { "role": { "const": "tool_result" } }, "required": ["role"] },
+            "then": { "required": ["tool", "content"] },
+            "else": { "required": ["content"], "properties": { "content": { "type": "string" } } }
+          }
+        ]
+      }
+    },
+    "variants": {
+      "description": "Rewordings of the tested request. The test protocol asks for at least 10 in a campaign.",
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    },
+    "expect": {
+      "description": "Success criteria. At least one typed check is required; `judge` alone is not enough.",
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/check" }
+    },
+    "params": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "temperature": { "type": "number", "minimum": 0, "maximum": 2 },
+        "top_p": { "type": "number", "minimum": 0, "maximum": 1 },
+        "max_tokens": { "type": "integer", "minimum": 1 },
+        "runs": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "tags": { "type": "array", "items": { "type": "string" }, "uniqueItems": true }
+  },
+  "$defs": {
+    "value": { "type": ["number", "string"] },
+    "check": {
+      "type": "object",
+      "required": ["check"],
+      "properties": {
+        "check": {
+          "type": "string",
+          "enum": [
+            "present_value",
+            "absent_value",
+            "states_unknown",
+            "no_new_numbers",
+            "announces_default",
+            "tool_called",
+            "tool_not_called",
+            "regex",
+            "judge"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "check": { "enum": ["present_value", "absent_value"] } }, "required": ["check"] },
+          "then": {
+            "additionalProperties": false,
+            "required": ["check", "value"],
+            "properties": {
+              "check": true,
+              "value": { "$ref": "#/$defs/value" },
+              "tolerance": { "type": "number", "minimum": 0 },
+              "unit": { "type": "string" }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "check": { "const": "states_unknown" } }, "required": ["check"] },
+          "then": {
+            "additionalProperties": false,
+            "required": ["check", "subject"],
+            "properties": { "check": true, "subject": { "type": "string", "minLength": 1 } }
+          }
+        },
+        {
+          "if": { "properties": { "check": { "const": "no_new_numbers" } }, "required": ["check"] },
+          "then": {
+            "additionalProperties": false,
+            "properties": {
+              "check": true,
+              "allow": { "type": "array", "items": { "$ref": "#/$defs/value" } }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "check": { "const": "announces_default" } }, "required": ["check"] },
+          "then": {
+            "additionalProperties": false,
+            "required": ["check", "option"],
+            "properties": {
+              "check": true,
+              "option": { "type": ["integer", "string"] },
+              "mention": { "type": "string" }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "check": { "enum": ["tool_called", "tool_not_called"] } }, "required": ["check"] },
+          "then": {
+            "additionalProperties": false,
+            "required": ["check", "tool"],
+            "properties": { "check": true, "tool": { "type": "string" }, "args": { "type": "object" } }
+          }
+        },
+        {
+          "if": { "properties": { "check": { "const": "regex" } }, "required": ["check"] },
+          "then": {
+            "additionalProperties": false,
+            "required": ["check", "pattern"],
+            "properties": {
+              "check": true,
+              "pattern": { "type": "string" },
+              "mode": { "type": "string", "enum": ["present", "absent"], "default": "present" },
+              "ignore_case": { "type": "boolean", "default": true }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "check": { "const": "judge" } }, "required": ["check"] },
+          "then": {
+            "additionalProperties": false,
+            "required": ["check", "rubric"],
+            "properties": {
+              "check": true,
+              "rubric": { "type": "string", "description": "Published grid the judge applies." },
+              "criteria": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

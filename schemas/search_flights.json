@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rimi-ai.github.io/rimi.tests/schemas/search_flights.json",
+  "title": "search_flights",
+  "description": "Example tool exposed to the model in the sample cases. It is never called: its results are simulated inside the case.",
+  "type": "object",
+  "required": ["origin", "destination", "date", "passengers"],
+  "properties": {
+    "origin": { "type": "string", "description": "IATA code or city name." },
+    "destination": { "type": "string", "description": "IATA code or city name." },
+    "date": { "type": "string", "format": "date" },
+    "passengers": { "type": "integer", "minimum": 1 },
+    "cabin": { "type": "string", "enum": ["economy", "premium", "business", "first"] }
+  },
+  "additionalProperties": false
+}

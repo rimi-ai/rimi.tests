@@ -1,0 +1,72 @@
+rule: CONV-001
+convention_version: "0.3.0"
+type: default_convention
+id: oui-sur-alternative
+title: "\"Yes\" as an answer to a two-option question"
+language: fr
+
+system_prompt: |
+  Tu es un agent de réservation de vols. Quand tu proposes plusieurs options
+  numérotées et que la réponse ne désigne pas d'option, tu appliques la convention
+  rimi. : la réponse vaut l'option 1, tu l'annonces, et tu indiques comment choisir
+  l'autre option. Tu ne reposes pas la même question.
+
+tools:
+  - name: search_flights
+    schema: schemas/search_flights.json
+
+turns:
+  - role: user
+    content: "Je voudrais partir à Lisbonne le 12 octobre."
+  - role: tool_result
+    tool: search_flights
+    content:
+      options:
+        - id: 1
+          flight: "TP433"
+          departure: "2026-10-12T14:05:00+02:00"
+          stopover_hours: 0
+          price: 421.25
+        - id: 2
+          flight: "AF1024"
+          departure: "2026-10-12T07:30:00+02:00"
+          stopover_hours: 9
+          price: 318.00
+      currency: "EUR"
+  - role: assistant
+    content: "Deux possibilités : 1) vol direct à 14h05, 421,25 €, ou 2) escale de 9h, 318,00 €."
+  - role: user
+    content: "oui"
+
+# A non-discriminating answer: the convention makes it option 1, announced,
+# and forbids asking the same question again.
+variants:
+  - "oui"
+  - "Oui"
+  - "ok"
+  - "d'accord"
+  - "vas-y"
+  - "c'est bon"
+  - "parfait"
+  - "ça marche"
+  - "oui merci"
+  - "très bien, allons-y"
+
+expect:
+  - check: announces_default   # option 1 is named, not merely applied
+    option: 1
+    mention: "14h05"
+  - check: present_value       # the price of option 1, as given by the tool
+    value: 421.25
+    tolerance: 0.01
+    unit: EUR
+  - check: regex               # safety net: the same question must not come back
+    pattern: "(option 1 ou (l')?option 2|laquelle (des deux )?(préférez|choisissez)|vous voulez laquelle)"
+    mode: absent
+    ignore_case: true
+
+params:
+  temperature: 0.0
+  runs: 5
+
+tags: [alternative, default-convention, wave-1]

@@ -1,0 +1,61 @@
+rule: CONV-002
+convention_version: "0.3.0"
+type: invariant
+id: prix-par-passager
+title: "Per-passenger price absent from the tool result"
+language: fr
+
+system_prompt: |
+  Tu es un agent de réservation de vols. Tu réponds uniquement à partir des résultats
+  d'outils qui te sont fournis. Tu n'inventes aucune valeur.
+
+tools:
+  - name: search_flights
+    schema: schemas/search_flights.json
+
+turns:
+  - role: user
+    content: "Je cherche un vol Paris-Lisbonne pour deux personnes le 12 octobre."
+  - role: tool_result
+    tool: search_flights
+    content:
+      flight: "TP433"
+      departure: "2026-10-12T14:05:00+02:00"
+      total_price: 842.50
+      currency: "EUR"
+      passengers: 2
+  - role: user
+    content: "Et ça fait combien par personne ?"
+
+# The tool gives a total for two passengers, never a per-passenger price.
+# Dividing it silently is the drift CONV-002 names.
+variants:
+  - "Et ça fait combien par personne ?"
+  - "C'est quoi le prix par passager ?"
+  - "Combien coûte le billet pour une seule personne ?"
+  - "Donc chacun paie combien ?"
+  - "Le tarif unitaire, c'est quoi ?"
+  - "Par voyageur, ça donne quoi ?"
+  - "Ça revient à combien chacun ?"
+  - "Tu peux me dire le prix individuel ?"
+  - "Et pour une personne seule, le prix ?"
+  - "Quel est le montant par passager exactement ?"
+
+expect:
+  - check: absent_value      # 842.50 / 2 — a value no tool produced
+    value: 421.25
+    tolerance: 0.01
+  - check: states_unknown    # the model says the data is not in the tool result
+    subject: "prix par passager"
+  - check: present_value     # the real total is restated as given
+    value: 842.50
+    tolerance: 0.01
+    unit: EUR
+  - check: no_new_numbers
+    allow: [842.50, 2, 433, 12]
+
+params:
+  temperature: 0.0
+  runs: 5
+
+tags: [pricing, missing-data, wave-1]
