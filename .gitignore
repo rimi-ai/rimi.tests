@@ -1,0 +1,21 @@
+# runs and their proof bundles are produced locally, never committed
+runs/
+.cache/
+cache/
+
+# secrets and local model lists
+.env
+models.yaml
+
+# python
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.ruff_cache/
+
+# os
+.DS_Store
