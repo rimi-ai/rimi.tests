@@ -6,7 +6,7 @@ A test case is a self-contained YAML file: system prompt, tool schemas, **simula
 
 Without this, "testable" stays a promise.
 
-> **Status: step T1.** The repository skeleton, the case format and `rimi lint` are here. The engine (`rimi run`), the report and the proof bundle arrive in the following steps — see [Roadmap](#roadmap). Commands that are not implemented say so and exit with code 2.
+> **Status: step T2.** The case format, `rimi lint` and the engine (`rimi estimate`, `rimi run`) are here: cases run against real models through LiteLLM, deterministic checks decide, and every call is recorded in a chained log. The report, `rimi conform` and `rimi verify` arrive in the following steps — see [Roadmap](#roadmap). Commands that are not implemented say so and exit with code 2.
 
 ## Install
 
@@ -16,6 +16,21 @@ pip install -e ".[dev]"      # from a clone; the PyPI package comes later
 ```
 
 Python 3.11 or later.
+
+## Run cases against models
+
+```bash
+cp models.example.yaml models.yaml       # your models; keys stay in the environment
+export OPENAI_API_KEY=…                  # or ANTHROPIC_API_KEY, GEMINI_API_KEY…
+
+rimi estimate --profile dev              # calls and cost, before paying
+rimi run --profile dev --model gpt-4o    # 3 variants, 1 run, one model
+rimi run --profile campaign --out runs/  # what the test protocol asks for
+```
+
+A run writes `runs/<date>/`: every transcript under `raw/`, every call in the chained log, and the manifest of what was run. Cached calls are not billed twice; `--no-cache` forces real ones, `--resume` picks up an interrupted campaign without repeating a single call.
+
+Parameters come from the case, and `models.yaml` may override them — that is where a model's own constraints are declared (some models accept only `temperature=1`). The record keeps what was actually sent.
 
 ## Validate cases
 
@@ -111,8 +126,8 @@ The chained log, the hashes and the bundle layout are already in place ([`src/ri
 | Step | Content | State |
 | --- | --- | --- |
 | T1 | Skeleton, case schema, `rimi lint`, two example cases, unit tests | **done** |
-| T2 | Engine: plan, LiteLLM, cache, deterministic checks, `rimi run` | next |
-| T3 | Report md/json/csv, `rimi conform`, thresholds, exit codes | planned |
+| T2 | Engine: plan, LiteLLM, cache, deterministic checks, `rimi run` | **done** |
+| T3 | Report md/json/csv, `rimi conform`, thresholds, exit codes | next |
 | T4 | Test cases for wave 1 (15 rules) | planned |
 | T5 | First public campaign, 5 models, 3 providers | planned |
 | T6 | GitHub action, badge, scheduled campaign | planned |

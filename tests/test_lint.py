@@ -121,7 +121,9 @@ def test_cli_lint_exits_1_on_error(tmp_path, case):
 
 
 def test_cli_planned_commands_exit_2():
-    for command in (["run"], ["estimate"], ["verify", "runs/x"]):
+    """Commands that exist but belong to a later step say so, and exit 2."""
+    for command in (["verify", "runs/x"], ["report", "runs/x"], ["judge-audit", "runs/x"],
+                    ["conform", "--level", "A", "--report", "runs/x/report.json"]):
         result = CliRunner().invoke(main, command)
         assert result.exit_code == 2, command
 

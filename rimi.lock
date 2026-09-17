@@ -1,0 +1,12 @@
+{
+  "convention_version": "0.3.0",
+  "text_sha256": "a6156a2d9012aece09d50ead4e61f4aa9e758b0f0c28970c632c91c29ec43ee5",
+  "source": {
+    "repository": "rimi-ai/rimi.convention",
+    "tag": "v0.3.0",
+    "file": "en.md",
+    "url": "https://raw.githubusercontent.com/rimi-ai/rimi.convention/v0.3.0/en.md",
+    "text_sha256": "a6156a2d9012aece09d50ead4e61f4aa9e758b0f0c28970c632c91c29ec43ee5"
+  },
+  "pinned_by": "rimi-tests"
+}

@@ -109,3 +109,49 @@ def available() -> list[str]:
         if name.startswith("convention-") and name.endswith(".json"):
             versions.append(name[len("convention-"):-len(".json")])
     return sorted(versions)
+
+
+LOCK_FILE = "rimi.lock"
+
+
+def read_lock(path: str | Path = LOCK_FILE) -> dict[str, Any] | None:
+    """The pinned version, if there is one. A user's verdict never moves on its own."""
+    path = Path(path)
+    if not path.exists():
+        return None
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def write_lock(version: str, path: str | Path = LOCK_FILE) -> dict[str, Any]:
+    """Pin a version: what `rimi run` checks the cases against."""
+    index = load(version)
+    lock = {
+        "convention_version": index.version,
+        "text_sha256": index.text_sha256,
+        "source": index.source,
+        "pinned_by": "rimi-tests",
+    }
+    Path(path).write_text(json.dumps(lock, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return lock
+
+
+class VersionMismatchError(RuntimeError):
+    """Cases and lock disagree: mixing two versions is refused, not averaged."""
+
+
+def check_versions(case_versions: set[str], path: str | Path = LOCK_FILE) -> dict[str, Any]:
+    """Refuse to run when the cases do not all cite the pinned version."""
+    if len(case_versions) > 1:
+        raise VersionMismatchError(
+            "cases cite several versions of the convention: " + ", ".join(sorted(case_versions))
+        )
+    version = next(iter(case_versions))
+    lock = read_lock(path)
+    if lock is None:
+        return write_lock(version, path)
+    if lock["convention_version"] != version:
+        raise VersionMismatchError(
+            f"cases cite convention {version}, but {path} pins {lock['convention_version']}; "
+            f"run `rimi convention update --version {version}` to move the pin on purpose"
+        )
+    return lock
