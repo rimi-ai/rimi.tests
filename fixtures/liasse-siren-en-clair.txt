@@ -1,0 +1,33 @@
+LIASSE FISCALE — FORMULAIRE 2050 (document fictif, valeurs inventées)
+SARL ATELIER BELLEVUE — 12 rue des Cerisiers, 44000 Nantes
+SIREN : 812 345 678
+Exercice du 01/01/2025 au 31/12/2025
+Forme juridique : SARL — Activité : prestations de services
+Capital social : 20 000 € entièrement libéré — détenu à 100 % par des personnes physiques
+COMPTE DE RÉSULTAT (extrait)
+  Chiffre d'affaires net HT ........................... 486 200,00
+  Total des charges d'exploitation .................... 402 850,00
+  Charges exceptionnelles (comptes 67) ................ 3 120,00
+    dont amendes et pénalités (6712) .................. 450,00
+  Total des charges ................................... 411 300,00
+  Résultat fiscal (bénéfice imposable) ................ 74 900,00
+RÉGIME : TVA réel simplifié — IS taux réduit (15 %) — TVA exigible N-1 : 52 300,00
+TABLEAU 2054 — IMMOBILISATIONS : présent
+  Terrains (211) ...................................... néant
+  Constructions (213) ................................. 128 000,00
+TABLEAU 2055 — AMORTISSEMENTS : présent
+  Dotations de l'exercice ............................. 31 450,00
+  Durées pratiquées : constructions 25 ans, matériel informatique 3 ans
+  Véhicule de tourisme : Renault Clio V, prix TTC 21 400,00, CO2 112 g/km
+TABLEAU 2056 — PROVISIONS : présent
+  Provisions début d'exercice ......................... 12 000,00
+  Dotations de l'exercice ............................. 4 500,00
+  Reprises de l'exercice .............................. 2 000,00
+  Provisions fin d'exercice ........................... 14 500,00
+  dont provisions pour risques et charges (15) ........ 6 500,00
+  Dépréciation des comptes clients (491) .............. 8 000,00
+  Créances clients brutes ............................. 96 400,00
+  Annexe : motifs des provisions détaillés page 7
+PASSIF — Charges à payer (408/428/438/448) ............ 18 750,00
+TABLEAU 2058-A — DÉTERMINATION DU RÉSULTAT FISCAL : présent
+  Total des réintégrations extra-comptables ........... 9 200,00

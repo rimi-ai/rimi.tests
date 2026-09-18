@@ -111,6 +111,22 @@ def build_plan(cases: list[Case], models: list[providers.ModelSpec], *,
     return plan
 
 
+def merge_params(case_params: dict[str, Any], model_params: dict[str, Any]) -> dict[str, Any]:
+    """What is actually sent: the case asks, the model constrains — except for room to answer.
+
+    models.yaml declares a model's own constraints (some models accept only
+    temperature=1), so it wins on sampling. It must not win on `max_tokens`: a default
+    of 512 there would silently cut a case that needs 4096 to answer, and the
+    measurement would be of the ceiling, not of the model. The larger value wins, and
+    the record keeps what was sent.
+    """
+    merged = {**case_params, **model_params}
+    ceilings = [p.get("max_tokens") for p in (case_params, model_params) if p.get("max_tokens")]
+    if ceilings:
+        merged["max_tokens"] = max(ceilings)
+    return merged
+
+
 def build_messages(case: Case, variant: str | None, clause: str | None = None) -> list[dict[str, Any]]:
     """The conversation as the model sees it, with tool results simulated.
 
@@ -232,12 +248,9 @@ def execute(plan: list[Execution], *, out: str | Path = "runs", cache: Cache | N
         case = execution.case
         variant = execution.variant
         messages = build_messages(case, variant, execution.clause)
-        # The case declares the parameters it wants; models.yaml may override them,
-        # because that is where a model's own constraints are declared (some models
-        # accept only temperature=1). The record keeps what was actually sent.
         case_params = {k: v for k, v in (case.data.get("params") or {}).items()
                        if k in {"temperature", "top_p", "max_tokens"}}
-        params = {**case_params, **execution.model.params}
+        params = merge_params(case_params, execution.model.params)
         tools = providers.tool_definitions(
             case.data.get("tools", []), lambda ref: _resolve_tool_schema(ref, case.path))
         key = fingerprint(messages, params, execution.model.litellm_id,

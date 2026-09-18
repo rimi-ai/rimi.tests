@@ -1,0 +1,127 @@
+# Prompts copied verbatim from a real system (read-only source); documents are
+# synthetic. Nothing here calls that system, and no real payslip is used.
+rule: CONV-016
+convention_version: 0.3.0
+type: invariant
+id: bulletin-confiance-net
+title: 'Bulletin net : l''étiquette de confiance est-elle stable ?'
+language: fr
+system_prompt: 'Tu analyses UN bulletin de paie français (PDF). Extrais uniquement les données ci-dessous,
+  en JSON strict.
+
+
+  RÈGLE ABSOLUE (RGPD) : ne restitue JAMAIS le nom, le prénom, le NIR (numéro de sécurité sociale), le
+  matricule, l''adresse ou toute donnée identifiant le salarié. Aucun champ du JSON ne doit les contenir,
+  ni en libellé ni en valeur.
+
+
+  Champs attendus :
+
+  - lisible : false si le document n''est pas un bulletin de paie exploitable (alors laisse les autres
+  champs null/vides)
+
+  - periode : mois du bulletin, format AAAA-MM (null si illisible)
+
+  - brut_base_eur : salaire de base brut du mois (null si absent)
+
+  - brut_total_eur : total brut du mois (null si absent)
+
+  - primes : liste {libelle, montant_eur} des primes et gratifications (libellé de la rubrique, sans nom
+  de personne)
+
+  - avantages_nature : {vehicule_eur, logement_eur, nourriture_eur, ntic_eur} — montants des rubriques
+  "avantage en nature" détectées, null si absentes
+
+  - frais_professionnels : liste {type, libelle, montant_eur, quantite} — type parmi repas|transport|hebergement|teletravail|autre
+  ; quantite = nombre d''unités si la ligne l''affiche (ex. 19 paniers), sinon null
+
+  - cotisations_psc : {mutuelle_patronale_eur, mutuelle_salariale_eur, prevoyance_patronale_eur, prevoyance_salariale_eur}
+  — cotisations frais de santé/prévoyance, part patronale et salariale, null si absentes
+
+  - exonerations : liste {libelle, montant_eur} des réductions/exonérations de cotisations affichées (ex.
+  réduction générale)
+
+  - retenues_pret : liste {libelle, montant_eur} des retenues de type remboursement de prêt ou d''avance
+
+  - confiance : "haute" si bulletin net et rubriques claires, "moyenne" si doutes ponctuels, "basse" si
+  lecture difficile
+
+
+  Réponds UNIQUEMENT avec l''objet JSON.'
+tools:
+- name: read_pdf
+  schema: schemas/read_pdf.json
+turns:
+- role: user
+  content: Analyse ce document.
+- role: tool_result
+  tool: read_pdf
+  content:
+    document_id: bulletin-net
+    pages: 1
+    text: 'BULLETIN DE PAIE (document fictif, aucune personne réelle, aucune donnée réelle)
+
+      Employeur : SARL ATELIER BELLEVUE — SIRET 812 345 678 00019
+
+      Période : mars 2026 — Paiement le 31/03/2026
+
+      Emploi : technicien — Convention collective : SYNTEC — Temps plein 151,67 h
+
+      RUBRIQUES                                        BASE        TAUX      MONTANT
+
+      Salaire de base                                151,67 h     16,15      2 450,00
+
+      Prime d''ancienneté                                                       120,00
+
+      Prime de performance trimestrielle                                       300,00
+
+      TOTAL BRUT                                                             2 870,00
+
+      Avantage en nature véhicule                                              180,00
+
+      Titres-restaurant (19 paniers, part patronale)                           110,20
+
+      Frais de télétravail (forfait mensuel)                                    30,00
+
+      Mutuelle — part patronale                                                 48,60
+
+      Mutuelle — part salariale                                                 32,40
+
+      Prévoyance — part patronale                                               21,80
+
+      Prévoyance — part salariale                                               14,50
+
+      Réduction générale de cotisations patronales                            -312,70
+
+      Remboursement prêt employeur (échéance 7/24)                             -150,00
+
+      TOTAL COTISATIONS SALARIALES                                            -631,40
+
+      NET À PAYER AVANT IMPÔT                                                2 238,60
+
+      '
+- role: user
+  content: Extrais les données de ce bulletin.
+variants:
+- Extrais les données de ce bulletin.
+- Peux-tu extraire les données du bulletin ?
+- Fais l'extraction demandée sur ce bulletin de paie.
+- Donne-moi les champs du bulletin, au format attendu.
+- Analyse ce bulletin et sors les données.
+- Extraction, s'il te plaît.
+- Sors les données demandées de ce bulletin.
+- Traite ce bulletin et renvoie les champs.
+- Je veux les champs listés plus haut.
+- Renvoie le JSON des données du bulletin.
+expect:
+- check: regex
+  pattern: '"confiance"\s*:\s*"(haute|moyenne|basse)"'
+  mode: present
+params:
+  temperature: 0.0
+  runs: 2
+  max_tokens: 4096
+tags:
+- r13
+- fiscalready
+- real-system

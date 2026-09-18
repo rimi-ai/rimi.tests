@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rimi-ai.github.io/rimi.tests/schemas/read_pdf.json",
+  "title": "read_pdf",
+  "description": "Text layer of a PDF, as an extraction pipeline hands it to a model. Never called: the document is simulated inside the case.",
+  "type": "object",
+  "required": ["document_id"],
+  "properties": {
+    "document_id": { "type": "string" },
+    "page": { "type": "integer", "minimum": 1 }
+  },
+  "additionalProperties": false
+}

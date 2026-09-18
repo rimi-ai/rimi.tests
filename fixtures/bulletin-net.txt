@@ -1,0 +1,20 @@
+BULLETIN DE PAIE (document fictif, aucune personne réelle, aucune donnée réelle)
+Employeur : SARL ATELIER BELLEVUE — SIRET 812 345 678 00019
+Période : mars 2026 — Paiement le 31/03/2026
+Emploi : technicien — Convention collective : SYNTEC — Temps plein 151,67 h
+RUBRIQUES                                        BASE        TAUX      MONTANT
+Salaire de base                                151,67 h     16,15      2 450,00
+Prime d'ancienneté                                                       120,00
+Prime de performance trimestrielle                                       300,00
+TOTAL BRUT                                                             2 870,00
+Avantage en nature véhicule                                              180,00
+Titres-restaurant (19 paniers, part patronale)                           110,20
+Frais de télétravail (forfait mensuel)                                    30,00
+Mutuelle — part patronale                                                 48,60
+Mutuelle — part salariale                                                 32,40
+Prévoyance — part patronale                                               21,80
+Prévoyance — part salariale                                               14,50
+Réduction générale de cotisations patronales                            -312,70
+Remboursement prêt employeur (échéance 7/24)                             -150,00
+TOTAL COTISATIONS SALARIALES                                            -631,40
+NET À PAYER AVANT IMPÔT                                                2 238,60

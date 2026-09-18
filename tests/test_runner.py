@@ -259,3 +259,16 @@ def test_a_truncated_answer_decides_nothing(tmp_path):
     assert all(check["ok"] is None for check in result["checks"])
     assert "truncated at max_tokens" in result["checks"][0]["detail"]
     assert summary.pass_rate() == 0.0 or True  # excluded from the rate, not counted against
+
+
+def test_a_model_default_never_cuts_the_room_a_case_asks_for():
+    """models.yaml constrains sampling; it must not silently cap the answer.
+
+    A 512-token default there against a case asking for 4096 measured the ceiling,
+    not the model: every long answer came back truncated.
+    """
+    merged = runner.merge_params({"temperature": 0.0, "max_tokens": 4096},
+                                 {"temperature": 1, "max_tokens": 512})
+    assert merged == {"temperature": 1, "max_tokens": 4096}
+    assert runner.merge_params({"max_tokens": 256}, {"max_tokens": 1024})["max_tokens"] == 1024
+    assert runner.merge_params({"temperature": 0.0}, {"temperature": 1}) == {"temperature": 1}

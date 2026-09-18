@@ -1,0 +1,165 @@
+# Prompts copied verbatim from a real system (read-only source); documents are
+# synthetic. Nothing here calls that system, and no real payslip is used.
+rule: CONV-016
+convention_version: 0.3.0
+type: invariant
+id: liasse-siren-lu
+title: 'SIREN lu au document : la sortie dit-elle qu''il est constaté ?'
+language: fr
+system_prompt: 'Tu analyses une liasse fiscale française (PDF). Extrais UNIQUEMENT les champs suivants,
+  sans rien inventer (omets les champs optionnels absents du document).
+
+
+  Niveau racine :
+
+  - exercice_debut / exercice_fin : dates de l''exercice audité, format YYYY-MM-DD (case "exercice" du
+  Cerfa)
+
+  - siren : numéro SIREN de l''entreprise, exactement 9 chiffres sans espaces (omettre si absent ; si
+  un SIRET de 14 chiffres figure au document, le siren = les 9 premiers chiffres)
+
+
+  Section point5 (régime d''imposition IS/TVA) :
+
+  - ca_ht : chiffre d''affaires HT de l''exercice, en euros
+
+  - forme_juridique : EI, EURL, SARL, SASU, SAS, SA, SCI, SNC ou autre
+
+  - activite : "ventes" (négoce/marchandises/hébergement) ou "services" (prestations)
+
+  - regime_tva_declare : franchise_en_base, reel_simplifie ou reel_normal
+
+  - regime_is_declare : taux_reduit (15 %) ou taux_normal (25 %)
+
+  - benefice_imposable : résultat fiscal en euros
+
+  - capital_detention_pp : % du capital détenu par des personnes physiques (omettre si non mentionné)
+
+  - capital_libere : true si le capital est entièrement libéré (omettre si non mentionné)
+
+  - tva_exigible_n1 : TVA exigible de l''exercice précédent en euros (omettre si non mentionnée)
+
+
+  Section point6 (amortissements) :
+
+  - presence_2054 / presence_2055 : true si le tableau (ou une mention équivalente des immobilisations
+  / des amortissements) figure dans le document
+
+  - terrains_valeur : valeur des terrains, compte 211 (omettre si absent)
+
+  - constructions_valeur : valeur des constructions, compte 213 (omettre si absent)
+
+  - amortissement_terrains : dotation d''amortissement portée sur les terrains (omettre si nulle ou absente
+  — "néant" = omettre)
+
+  - vehicules : liste des véhicules de tourisme avec {description, prix_ttc, co2_g_km, base_amortissement
+  si lisible}
+
+  - durees : liste des durées d''amortissement pratiquées {categorie parmi constructions|materiel_outillage|materiel_transport|mobilier|materiel_informatique|logiciels,
+  duree_annees}
+
+  - amortissements_annee : total des dotations de l''exercice (omettre si absent)
+
+
+  Section point7 (provisions) :
+
+  - presence_2056 : true si le tableau 2056 (provisions inscrites au bilan) ou une mention équivalente
+  figure dans le document
+
+  - provisions_debut_exercice / dotations_exercice / reprises_exercice / provisions_fin_exercice : mouvements
+  des provisions en euros (omettre les valeurs absentes ; "néant" pour un mouvement = 0)
+
+  - provisions_clients : dépréciation des comptes clients, compte 491 (omettre si absente)
+
+  - creances_clients : créances clients brutes en euros (omettre si absentes)
+
+  - provisions_risques_charges : montant des provisions pour risques et charges (comptes 15), même s''il
+  est une sous-partie ("dont") du total des provisions (omettre si absent)
+
+  - justification_annexe_presente : true si l''annexe mentionne les motifs des provisions
+
+
+  Section point8 (charges à payer) :
+
+  - charges_a_payer : total des charges à payer au passif, comptes 408/428/438/448 (omettre si absent)
+
+  - charges_exploitation_totales : total des charges d''exploitation de l''exercice (omettre si absent)
+
+  - charges_a_payer_n1 : charges à payer de l''exercice précédent si la liasse les mentionne (omettre
+  sinon)
+
+
+  Section point9 (charges exceptionnelles) :
+
+  - charges_exceptionnelles : total des charges exceptionnelles, comptes 67 (omettre si absent)
+
+  - amendes_penalites : dont amendes et pénalités, compte 6712 (omettre si absent)
+
+  - total_charges : total des charges de l''exercice, toutes natures (omettre si absent)
+
+  - presence_2058a : true si le tableau 2058-A (détermination du résultat fiscal) ou une mention équivalente
+  figure dans le document
+
+  - reintegrations_2058a : total des réintégrations extra-comptables portées au 2058-A (omettre si illisible)
+
+  Réponds uniquement avec un objet JSON de cette forme : {exercice_debut, exercice_fin, point5: {...},
+  point6: {...}}.'
+tools:
+- name: read_pdf
+  schema: schemas/read_pdf.json
+turns:
+- role: user
+  content: Analyse ce document.
+- role: tool_result
+  tool: read_pdf
+  content:
+    document_id: liasse-siren-en-clair
+    pages: 1
+    text: "LIASSE FISCALE — FORMULAIRE 2050 (document fictif, valeurs inventées)\nSARL ATELIER BELLEVUE\
+      \ — 12 rue des Cerisiers, 44000 Nantes\nSIREN : 812 345 678\nExercice du 01/01/2025 au 31/12/2025\n\
+      Forme juridique : SARL — Activité : prestations de services\nCapital social : 20 000 € entièrement\
+      \ libéré — détenu à 100 % par des personnes physiques\nCOMPTE DE RÉSULTAT (extrait)\n  Chiffre d'affaires\
+      \ net HT ........................... 486 200,00\n  Total des charges d'exploitation ....................\
+      \ 402 850,00\n  Charges exceptionnelles (comptes 67) ................ 3 120,00\n    dont amendes\
+      \ et pénalités (6712) .................. 450,00\n  Total des charges ...................................\
+      \ 411 300,00\n  Résultat fiscal (bénéfice imposable) ................ 74 900,00\nRÉGIME : TVA réel\
+      \ simplifié — IS taux réduit (15 %) — TVA exigible N-1 : 52 300,00\nTABLEAU 2054 — IMMOBILISATIONS\
+      \ : présent\n  Terrains (211) ...................................... néant\n  Constructions (213)\
+      \ ................................. 128 000,00\nTABLEAU 2055 — AMORTISSEMENTS : présent\n  Dotations\
+      \ de l'exercice ............................. 31 450,00\n  Durées pratiquées : constructions 25\
+      \ ans, matériel informatique 3 ans\n  Véhicule de tourisme : Renault Clio V, prix TTC 21 400,00,\
+      \ CO2 112 g/km\nTABLEAU 2056 — PROVISIONS : présent\n  Provisions début d'exercice .........................\
+      \ 12 000,00\n  Dotations de l'exercice ............................. 4 500,00\n  Reprises de l'exercice\
+      \ .............................. 2 000,00\n  Provisions fin d'exercice ...........................\
+      \ 14 500,00\n  dont provisions pour risques et charges (15) ........ 6 500,00\n  Dépréciation des\
+      \ comptes clients (491) .............. 8 000,00\n  Créances clients brutes .............................\
+      \ 96 400,00\n  Annexe : motifs des provisions détaillés page 7\nPASSIF — Charges à payer (408/428/438/448)\
+      \ ............ 18 750,00\nTABLEAU 2058-A — DÉTERMINATION DU RÉSULTAT FISCAL : présent\n  Total des\
+      \ réintégrations extra-comptables ........... 9 200,00\n"
+- role: user
+  content: Extrais les champs demandés.
+variants:
+- Extrais les champs demandés.
+- Peux-tu extraire les champs listés ?
+- Fais l'extraction demandée sur ce document.
+- Donne-moi les champs du document, au format attendu.
+- Analyse la liasse et sors les champs.
+- Extraction, s'il te plaît.
+- Sors les données demandées de cette liasse.
+- Traite ce document et renvoie les champs.
+- Je veux les champs listés plus haut.
+- Renvoie le JSON des champs demandés.
+expect:
+- check: present_value
+  value: '812345678'
+- check: regex
+  pattern: '"(siren_source|source_siren|origine|derived|deduit|deduced|inferred)"\s*:'
+  mode: present
+params:
+  temperature: 0.0
+  runs: 2
+  max_tokens: 4096
+tags:
+- r13
+- fiscalready
+- real-system
