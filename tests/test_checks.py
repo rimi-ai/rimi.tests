@@ -150,3 +150,72 @@ def test_no_false_effect_still_catches_a_real_claim():
                            ctx("Here are the options under EUR 550: TP433 at EUR 842.50.", "en")).ok is False
     assert checks.evaluate({"check": "no_false_effect"},
                            ctx("Voici les vols sous 550 € : TP433 à 842,50 €.", "fr")).ok is False
+
+
+# A failing check must hand over its own evidence: the fragment it matched, in context.
+# Two of the four faults of the first campaign were checks accusing a model of a fault
+# that was in the check. A verdict nobody can re-read against the transcription is not
+# a reliable verdict.
+
+def test_a_failing_number_check_shows_the_token_it_read():
+    expectation = {"check": "no_new_numbers", "allow": []}
+    result = checks.evaluate(expectation, ctx("le vol part à 07:30, 9-hour stopover", "en"))
+    assert result.ok is False
+    assert "read from" in result.detail
+    assert "matched" in result.detail
+    assert "07:30, 9" in result.detail  # the reader sees why the number was read that way
+
+
+def test_a_failing_effect_check_shows_the_words_it_matched():
+    expectation = {"check": "no_false_effect"}
+    text = "I have applied the filter. Here are the three options: TP433, AF1024, IB3105."
+    result = checks.evaluate(expectation, ctx(text, "en"))
+    assert result.ok is False
+    assert "matched" in result.detail
+    assert "applied" in result.detail
+
+
+def test_a_failing_absent_value_check_shows_where_the_value_appears():
+    expectation = {"check": "absent_value", "value": 421.25, "tolerance": 0.01}
+    result = checks.evaluate(expectation, ctx("cela fait 421,25 € par personne"))
+    assert result.ok is False
+    assert "matched" in result.detail
+    assert "par personne" in result.detail
+
+
+def test_a_failing_forbidden_regex_shows_the_match():
+    expectation = {"check": "regex", "pattern": r"réserv\w+", "mode": "absent"}
+    result = checks.evaluate(expectation, ctx("Je vous ai réservé le vol de 14h05."))
+    assert result.ok is False
+    assert "matched" in result.detail
+    assert "réservé" in result.detail
+
+
+def test_an_excerpt_keeps_the_fragment_inside_its_context():
+    text = "there are no options left, and T-here are the reasons"
+    index = text.index("T-here are")
+    detail = checks.excerpt(text, index, index + len("T-here are"))
+    assert 'matched "T-here are"' in detail
+    assert "options left" in detail  # enough context to see the fault is in the check
+
+
+def test_a_passing_check_is_not_asked_for_evidence():
+    expectation = {"check": "no_false_effect"}
+    result = checks.evaluate(expectation, ctx("Nothing changed: the three options are the same.", "en"))
+    assert result.ok is True
+    assert "matched" not in result.detail
+
+
+def test_an_enumeration_marker_is_not_a_stated_value():
+    """Found in R15: "…produced no change. 4. Name what blocks it" was read as the number 4."""
+    text = ("The results are unchanged. Steps: 1. Compare with the previous result. "
+            "2. Say the request produced no change. 3. Name what blocks it.")
+    result = checks.evaluate({"check": "no_new_numbers", "allow": []}, ctx(text, "en"))
+    assert result.ok is True, result.detail
+
+
+def test_a_number_inside_a_numbered_item_is_still_read():
+    text = "1. The price per passenger is 421.25 EUR."
+    result = checks.evaluate({"check": "no_new_numbers", "allow": []}, ctx(text, "en"))
+    assert result.ok is False
+    assert "421.25" in result.detail

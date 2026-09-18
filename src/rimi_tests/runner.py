@@ -264,7 +264,16 @@ def execute(plan: list[Execution], *, out: str | Path = "runs", cache: Cache | N
             source_numbers=source_numbers(case, variant),
         )
         verdicts = checks.evaluate_all(case.expected_checks, context)
-        passed = checks.verdict(verdicts)
+        truncated = completion.finish_reason == "length"
+        if truncated:
+            # A cut answer decides nothing: what it would have said next is missing, and a
+            # number cut in two ("EUR 55" from "EUR 550") reads as a number nobody wrote.
+            # Found on the remedy arm, whose clause makes answers longer. Judging it would
+            # charge a model with a fault of our own measurement.
+            verdicts = [dict(verdict, ok=None,
+                             detail=f"response truncated at max_tokens ({verdict['detail']})")
+                        for verdict in verdicts]
+        passed = None if truncated else checks.verdict(verdicts)
 
         transcript = {
             "execution": execution.key,
@@ -297,6 +306,7 @@ def execute(plan: list[Execution], *, out: str | Path = "runs", cache: Cache | N
             "tokens": completion.usage,
             "latency_ms": completion.latency_ms,
             "finish_reason": completion.finish_reason,
+            "truncated": truncated,
             "answered_with_tool_call": bool(completion.tool_calls) and not completion.text.strip(),
             "from_cache": from_cache,
             "passed": passed,
@@ -312,6 +322,7 @@ def execute(plan: list[Execution], *, out: str | Path = "runs", cache: Cache | N
                 "case": f"{case.rule}/{case.id}",
                 "rule": case.rule,
                 "arm": execution.arm,
+                "truncated": truncated,
                 "answered_with_tool_call": bool(completion.tool_calls) and not completion.text.strip(),
                 "model": execution.model.name,
                 "variant_index": execution.variant_index,

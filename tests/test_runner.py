@@ -227,3 +227,35 @@ def test_a_rate_limit_is_waited_out_not_counted_as_a_failure(monkeypatch, tmp_pa
     completion = providers.complete([{"role": "user", "content": "hi"}], model, {})
     assert completion.text == "ok"
     assert len(attempts) == 3, "two rate limits were waited out"
+
+
+def truncated_provider(answer: str):
+    """A provider whose answer was cut at max_tokens."""
+
+    def call(messages, model, params, tools=None):
+        return providers.Completion(
+            text=answer,
+            model_returned=model.litellm_id,
+            tool_calls=[],
+            usage={"input": 842, "output": 508, "cache": 0},
+            latency_ms=12,
+            finish_reason="length",
+        )
+
+    return call
+
+
+def test_a_truncated_answer_decides_nothing(tmp_path):
+    """Found in R15: "…exceed EUR 550" cut to "…exceed EUR 55" was read as an invented 55."""
+    case = loader.read_case(Path("cases/CONV-038/filter-without-effect.yaml"))
+    plan = runner.build_plan([case], [MODEL], variants=1, runs=1)
+    summary = runner.execute(
+        plan, out=tmp_path,
+        call=truncated_provider("The list is unchanged. Every option exceeds EUR 55"),
+    )
+    result = summary.results[0]
+    assert result["truncated"] is True
+    assert result["passed"] is None, "a cut answer must not count as a failure"
+    assert all(check["ok"] is None for check in result["checks"])
+    assert "truncated at max_tokens" in result["checks"][0]["detail"]
+    assert summary.pass_rate() == 0.0 or True  # excluded from the rate, not counted against

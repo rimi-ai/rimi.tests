@@ -125,14 +125,52 @@ def parse_number(token: str) -> Decimal | None:
         return None
 
 
-def numbers_in(text: str) -> list[Decimal]:
-    """Every number a text states, whatever the local format."""
+# "1." or "2)" opening an item: an ordinal marks a list, it states no value.
+_LIST_MARKER = re.compile(r"(?:^|[\n\r]|[.:;!?]\s*)\s*\d{1,2}\s*[.)]\s")
+
+
+def _list_marker_spans(text: str) -> list[tuple[int, int]]:
+    return [(m.start(), m.end()) for m in _LIST_MARKER.finditer(text)]
+
+
+def numbers_with_spans(text: str) -> list[tuple[Decimal, str, int, int]]:
+    """Every number a text states, with the token read and where it was read.
+
+    An enumeration marker is not a stated value: a model that answers in numbered steps
+    ("3. Name what blocks it") states no number there. Reading one as a value accuses the
+    model of inventing a figure it never wrote — the fault would be in the check.
+    """
+    markers = _list_marker_spans(text)
     found = []
     for match in _NUMBER_TOKEN.finditer(text):
+        if any(start <= match.start() < end for start, end in markers):
+            continue
         value = parse_number(match.group())
         if value is not None:
-            found.append(value)
+            found.append((value, match.group(), match.start(), match.end()))
     return found
+
+
+def numbers_in(text: str) -> list[Decimal]:
+    """Every number a text states, whatever the local format."""
+    return [value for value, _, _, _ in numbers_with_spans(text)]
+
+
+def excerpt(text: str, start: int, end: int, width: int = 28) -> str:
+    """What a check actually matched, inside enough text to judge the check itself.
+
+    Two of the four faults found on the first campaign were checks accusing a model
+    of a fault that was in the check: "here are" matched inside "T-here are", and
+    "07:30, 9-hour" was read as the number 30.9. Neither was visible from a verdict
+    alone. A failing check now shows its own evidence, so it can be read against the
+    transcription — a check nobody can re-read is not a reliable check.
+    """
+    fragment = " ".join(text[start:end].split())
+    before = " ".join(text[max(0, start - width):start].split())
+    after = " ".join(text[end:end + width].split())
+    lead = "…" if start > width else ""
+    tail = "…" if end + width < len(text) else ""
+    return f'matched "{fragment}" in "{lead}{before}{fragment}{after}{tail}"'
 
 
 def _close(a: Decimal, b: Decimal, tolerance: float | None) -> bool:
@@ -180,8 +218,22 @@ def _present_value(expectation: dict[str, Any], ctx: CheckContext) -> CheckResul
 def _absent_value(expectation: dict[str, Any], ctx: CheckContext) -> CheckResult:
     result = _present_value(expectation, ctx)
     value = expectation["value"]
-    return (CheckResult(False, f"{value} appears, and no tool produced it") if result.passed
-            else CheckResult(True, f"{value} does not appear"))
+    if not result.passed:
+        return CheckResult(True, f"{value} does not appear")
+    return CheckResult(False, f"{value} appears, and no tool produced it — {_where(value, expectation, ctx)}")
+
+
+def _where(value: Any, expectation: dict[str, Any], ctx: CheckContext) -> str:
+    """Where a value was read in the response, as the check read it."""
+    if isinstance(value, (int, float)):
+        target, tolerance = Decimal(str(value)), expectation.get("tolerance")
+        for number, _, start, end in numbers_with_spans(ctx.response_text):
+            if _close(number, target, tolerance):
+                return excerpt(ctx.response_text, start, end)
+        return "position not found"
+    index = ctx.folded.find(fold(str(value)))
+    return (excerpt(ctx.folded, index, index + len(fold(str(value))))
+            if index >= 0 else "position not found")
 
 
 def _states_unknown(expectation: dict[str, Any], ctx: CheckContext) -> CheckResult:
@@ -198,10 +250,14 @@ def _states_unknown(expectation: dict[str, Any], ctx: CheckContext) -> CheckResu
 def _no_new_numbers(expectation: dict[str, Any], ctx: CheckContext) -> CheckResult:
     allowed = list(ctx.source_numbers)
     allowed += [Decimal(str(v)) for v in expectation.get("allow", []) if isinstance(v, (int, float))]
-    unexpected = [n for n in numbers_in(ctx.response_text)
+    unexpected = [(n, token, start, end) for n, token, start, end in numbers_with_spans(ctx.response_text)
                   if not any(_close(n, a, 0.005) for a in allowed)]
     if unexpected:
-        return CheckResult(False, "numbers from nowhere: " + ", ".join(str(n) for n in unexpected[:5]))
+        shown = "; ".join(
+            f"{value} read from {token!r} — {excerpt(ctx.response_text, start, end)}"
+            for value, token, start, end in unexpected[:3]
+        )
+        return CheckResult(False, f"numbers from nowhere: {shown}")
     return CheckResult(True, "every number comes from the request or the tool results")
 
 
@@ -247,7 +303,12 @@ def _regex(expectation: dict[str, Any], ctx: CheckContext) -> CheckResult:
     expected_present = expectation.get("mode", "present") == "present"
     if found is expected_present:
         return CheckResult(True, "pattern " + ("found" if found else "absent"))
-    return CheckResult(False, "pattern " + ("found but forbidden" if found else "not found"))
+    if not found:
+        return CheckResult(False, "pattern not found")
+    match = (re.search(expectation["pattern"], ctx.response_text, flags)
+             or re.search(fold(expectation["pattern"]), ctx.folded))
+    source = ctx.response_text if re.search(expectation["pattern"], ctx.response_text, flags) else ctx.folded
+    return CheckResult(False, f"pattern found but forbidden — {excerpt(source, match.start(), match.end())}")
 
 
 # Said with words in between: "no available flight options", "je n'ai pas trouve de vols".
@@ -285,13 +346,18 @@ def _no_false_effect(expectation: dict[str, Any], ctx: CheckContext) -> CheckRes
     result is unchanged passes.
     """
     patterns = EFFECT_CLAIM_PATTERNS.get(ctx.language, EFFECT_CLAIM_PATTERNS["en"])
-    claimed = next((p for p in patterns if re.search(p, ctx.folded)), None)
-    if claimed is None:
+    found = next(((p, m) for p in patterns for m in [re.search(p, ctx.folded)] if m), None)
+    if found is None:
         return CheckResult(True, "no effect is claimed")
+    pattern, match = found
     phrases = UNCHANGED_PHRASES.get(ctx.language, UNCHANGED_PHRASES["en"])
     if any(p in ctx.folded for p in phrases):
         return CheckResult(True, "an effect is announced, but the response also says nothing changed")
-    return CheckResult(False, f"presents an unchanged result as the outcome (matched {claimed!r})")
+    return CheckResult(
+        False,
+        f"presents an unchanged result as the outcome — pattern {pattern!r}, "
+        f"{excerpt(ctx.folded, match.start(), match.end())}",
+    )
 
 
 def _judge(expectation: dict[str, Any], ctx: CheckContext) -> CheckResult:
