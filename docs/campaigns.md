@@ -9,6 +9,8 @@ A campaign is what the convention's test protocol asks for: enough models, enoug
 
 Thresholds: a MUST or MUST NOT obligation passes at 95% of runs, a SHOULD at 80%. A rule reaches Stable status after two campaigns separated in time, on at least 3 providers and 5 models.
 
+**How many runs.** A verdict is given per obligation with an exact interval, and 50 runs cannot establish 95%: even a perfect 50/50 comes out *inconclusive*. It takes **59** one-sided. Trials are variants × runs, so ten variants at six runs (`--runs 6`) settle it; a campaign warns when its trials cannot. A case carrying a `remedy` clause runs twice — without it, then with it — and the report shows both columns.
+
 ## Running one (from step T2)
 
 ```bash

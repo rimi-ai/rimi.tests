@@ -37,11 +37,16 @@ def valid_case() -> dict:
 def test_sample_cases_load_and_validate():
     result = loader.load(CASES)
     assert result.ok, [str(p) for p in result.errors]
-    assert {c.rule for c in result.cases} == {"CONV-001", "CONV-002"}
+    assert {c.rule for c in result.cases} >= {"CONV-001", "CONV-002", "CONV-038"}
     for case in result.cases:
         assert len(case.variants) >= loader.CAMPAIGN_MIN_VARIANTS
         assert len(case.case_sha256) == 64
-        assert case.rule_sha256, "a validated case carries the hash of its rule"
+        if case.data.get("proposed_in"):
+            # A rule needs a test case before it can be Proposed: the case exists first,
+            # so it has no rule hash yet, and says where the rule is discussed.
+            assert case.rule_sha256 is None
+        else:
+            assert case.rule_sha256, "a case on a published rule carries the hash of that rule"
 
 
 def test_case_hash_is_stable_and_follows_the_bytes(tmp_path, valid_case):

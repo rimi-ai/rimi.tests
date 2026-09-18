@@ -188,3 +188,42 @@ def test_cost_separates_what_the_cache_served(tmp_path, cases):
                             call=fake_provider())
     assert second.cost(billed_only=True) == 0.0
     assert second.results[0]["from_cache"] is True and first.results[0]["from_cache"] is False
+
+
+def test_each_run_of_a_variant_is_its_own_call(tmp_path, cases):
+    """Five runs of one variant must be five samples, not one sample copied five times."""
+    calls: list[dict] = []
+    cache = cache_module.Cache(directory=tmp_path / "cache", enabled=True)
+    plan = runner.build_plan(cases[:1], [MODEL], variants=1, runs=5)
+    runner.execute(plan, out=tmp_path / "one", cache=cache, workers=1, day=DAY,
+                   call=fake_provider(record=calls))
+    assert len(calls) == 5, "the prompt is identical; the run index keeps them apart"
+    runner.execute(plan, out=tmp_path / "two", cache=cache, workers=1, day=DAY,
+                   call=fake_provider(record=calls))
+    assert len(calls) == 5, "re-running the same campaign still costs nothing"
+    assert cache.stats()["hits"] == 5
+
+
+def test_a_rate_limit_is_waited_out_not_counted_as_a_failure(monkeypatch, tmp_path):
+    """A token-per-minute ceiling must not silently shrink a campaign."""
+    attempts = []
+
+    class RateLimitError(Exception):
+        pass
+
+    class FakeLiteLLM:
+        @staticmethod
+        def completion(**kwargs):
+            attempts.append(kwargs)
+            if len(attempts) < 3:
+                raise RateLimitError("Rate limit reached for gpt-4o ... try again in 496ms")
+            return {"choices": [{"message": {"content": "ok"}, "finish_reason": "stop"}],
+                    "model": "fake-1-2026", "usage": {"prompt_tokens": 1, "completion_tokens": 1}}
+
+    monkeypatch.setitem(__import__("sys").modules, "litellm", FakeLiteLLM)
+    monkeypatch.setattr(providers.time, "sleep", lambda _s: None)
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "not-a-real-key")
+    model = providers.ModelSpec("m", "anthropic/m", "anthropic")
+    completion = providers.complete([{"role": "user", "content": "hi"}], model, {})
+    assert completion.text == "ok"
+    assert len(attempts) == 3, "two rate limits were waited out"

@@ -41,6 +41,41 @@ UNKNOWN_PHRASES: dict[str, tuple[str, ...]] = {
     ),
 }
 
+# "nothing moved", said in the language of the case (CONV-038).
+UNCHANGED_PHRASES: dict[str, tuple[str, ...]] = {
+    "fr": (
+        "aucun changement", "n'a pas change", "ne change pas", "ne change rien", "inchange",
+        "identique", "les memes", "meme liste", "meme resultat", "memes resultats",
+        "pas de difference", "sans effet", "n'a pas eu d'effet", "n'a pas ete applique",
+        "n'a pas pu etre applique", "aucun effet", "rien ne change", "toujours les memes",
+        # naming what blocks it is the other half of the obligation, and in practice a
+        # model says it this way: nothing matches, so nothing moved.
+        "aucun vol", "aucune option", "aucun resultat", "aucun des", "ne correspond",
+        "ne remplit", "ne satisfait", "en dessous de", "sous ce budget", "moins cher",
+    ),
+    "en": (
+        "no change", "unchanged", "did not change", "does not change", "identical",
+        "the same results", "same list", "same as before", "no difference", "no effect",
+        "was not applied", "could not be applied", "nothing changed", "still the same",
+        "no flight", "no option", "none of the", "nothing matches", "does not match",
+        "do not match", "cheapest", "below that budget", "under that budget",
+    ),
+}
+
+# "here are the results with your new criterion" — an effect announced.
+# Every pattern starts on a word boundary. Without it, "here are" matched inside
+# "T-here are no available options" and turned a compliant answer into a failure —
+# the check accused the model of a fault that was in the check.
+EFFECT_CLAIM_PATTERNS: dict[str, tuple[str, ...]] = {
+    "fr": (r"\bvoici\b.{0,40}(resultats|options|vols)", r"\bavec (votre|ce|le) (nouveau|nouvelle)\b",
+           r"\bj'ai (bien )?(applique|filtre|pris en compte|mis a jour)\b",
+           r"\bapres (application|filtrage)\b", r"\b(resultats|options|vols) (filtres|mis a jour)\b",
+           r"\ben (tenant compte|appliquant)\b"),
+    "en": (r"\bhere are\b.{0,40}(results|options|flights)", r"\bwith your (new|updated)\b",
+           r"\bi (have )?(applied|filtered|updated)\b", r"\b(now|results) filtered\b",
+           r"\bafter (applying|filtering)\b", r"\btaking\b.{0,20}\binto account\b"),
+}
+
 # "I am keeping option 1", said in the language of the case.
 DEFAULT_ANNOUNCE_PATTERNS: dict[str, tuple[str, ...]] = {
     "fr": (r"option\s*{option}\b", r"l['’]option\s*{option}\b", r"la\s*{option}(?:re|ere|eme)\b",
@@ -48,7 +83,14 @@ DEFAULT_ANNOUNCE_PATTERNS: dict[str, tuple[str, ...]] = {
     "en": (r"option\s*{option}\b", r"the\s*{option}(?:st|nd|rd|th)\b", r"first option", r"the first one"),
 }
 
-_NUMBER_TOKEN = re.compile(r"\d[\d   .,]*\d|\d")
+# A number, and nothing but a number. A comma or a space only stays inside the token
+# when digits follow it in the shape of a group of three: "07:30, 9-hour" is two
+# numbers, not 30.9, and reading it as one invents a value out of punctuation.
+_NUMBER_TOKEN = re.compile(
+    r"\d{1,3}(?:[ \u00A0\u202F]\d{3})+(?:[.,]\d+)?"   # 1 234,56
+    r"|\d{1,3}(?:[.,]\d{3})+(?:[.,]\d+)?"               # 1,234.56 and 1.234,56
+    r"|\d+(?:[.,]\d+)?"                                 # 842.50, 842,50, 842
+)
 
 
 def fold(text: str) -> str:
@@ -208,6 +250,50 @@ def _regex(expectation: dict[str, Any], ctx: CheckContext) -> CheckResult:
     return CheckResult(False, "pattern " + ("found but forbidden" if found else "not found"))
 
 
+# Said with words in between: "no available flight options", "je n'ai pas trouve de vols".
+UNCHANGED_PATTERNS: dict[str, tuple[str, ...]] = {
+    "fr": (r"aucun\w*\b[^.]{0,30}\b(vol|option|resultat|tarif)",
+           r"(n'ai|n'avons|il n'y a)\b[^.]{0,30}\b(pas|aucun)\b[^.]{0,30}\b(vol|option|resultat)",
+           r"(ne|n')\w*\b[^.]{0,20}\b(correspond|remplit|satisfait)"),
+    "en": (r"\b(no|none|not)\b[^.]{0,30}\b(flight|option|result|match)",
+           r"(did|do|does)\b[^.]{0,10}\bnot\b[^.]{0,20}\b(change|match|apply)",
+           r"\b(remain|remains|remained)\b[^.]{0,20}\b(unchanged|the same)"),
+}
+
+
+def _states_unchanged(expectation: dict[str, Any], ctx: CheckContext) -> CheckResult:
+    """CONV-038: the request produced no change, and the response must say so."""
+    phrases = UNCHANGED_PHRASES.get(ctx.language, UNCHANGED_PHRASES["en"])
+    said = next((p for p in phrases if p in ctx.folded), None)
+    if said is None:
+        patterns = UNCHANGED_PATTERNS.get(ctx.language, UNCHANGED_PATTERNS["en"])
+        match = next((m for m in (re.search(p, ctx.folded) for p in patterns) if m), None)
+        said = match.group(0) if match else None
+    if said is None:
+        return CheckResult(False, "the response never says the result did not change")
+    blocker = expectation.get("blocker")
+    if blocker and fold(str(blocker)) not in ctx.folded:
+        return CheckResult(False, f"says {said!r}, but never names what blocks it ({blocker!r})")
+    return CheckResult(True, f"says {said!r}" + (" and names the blocker" if blocker else ""))
+
+
+def _no_false_effect(expectation: dict[str, Any], ctx: CheckContext) -> CheckResult:
+    """CONV-038: an unchanged result MUST NOT be presented as the outcome of the request.
+
+    Announcing is not the fault by itself — announcing *instead of* saying that nothing
+    moved is. A response that claims the change was applied and also states that the
+    result is unchanged passes.
+    """
+    patterns = EFFECT_CLAIM_PATTERNS.get(ctx.language, EFFECT_CLAIM_PATTERNS["en"])
+    claimed = next((p for p in patterns if re.search(p, ctx.folded)), None)
+    if claimed is None:
+        return CheckResult(True, "no effect is claimed")
+    phrases = UNCHANGED_PHRASES.get(ctx.language, UNCHANGED_PHRASES["en"])
+    if any(p in ctx.folded for p in phrases):
+        return CheckResult(True, "an effect is announced, but the response also says nothing changed")
+    return CheckResult(False, f"presents an unchanged result as the outcome (matched {claimed!r})")
+
+
 def _judge(expectation: dict[str, Any], ctx: CheckContext) -> CheckResult:
     return CheckResult(None, "judge not evaluated: it arrives with step T3")
 
@@ -249,6 +335,12 @@ BUILTIN: dict[str, CheckSpec] = {
         CheckSpec("tool_not_called", True,
                   "No call to a tool that the case forbids at this point.",
                   required=("tool",), evaluate=_tool_not_called),
+        CheckSpec("states_unchanged", True,
+                  "The response says the request produced no change, and names what blocks it (CONV-038).",
+                  optional=("subject", "blocker"), evaluate=_states_unchanged),
+        CheckSpec("no_false_effect", True,
+                  "An unchanged result is not presented as the outcome of the request (CONV-038).",
+                  evaluate=_no_false_effect),
         CheckSpec("regex", True,
                   "Safety net: a pattern that must be present or absent. Prefer a typed check when one fits.",
                   required=("pattern",), optional=("mode", "ignore_case"), evaluate=_regex),

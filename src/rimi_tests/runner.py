@@ -38,11 +38,20 @@ class Execution:
     variant_index: int
     run_index: int
     model: providers.ModelSpec
+    arm: str = "base"          # "base" = the system as it is; "remedy" = with the proposed clause
 
     @property
     def key(self) -> str:
         """Stable identity of this call, used to resume without doing it twice."""
-        return f"{self.case.rule}/{self.case.id}#v{self.variant_index}r{self.run_index}@{self.model.name}"
+        suffix = "" if self.arm == "base" else f"~{self.arm}"
+        return (f"{self.case.rule}/{self.case.id}#v{self.variant_index}"
+                f"r{self.run_index}@{self.model.name}{suffix}")
+
+    @property
+    def clause(self) -> str | None:
+        """The remedy clause added to the system prompt, for the second arm only."""
+        remedy = self.case.data.get("remedy") if self.arm == "remedy" else None
+        return remedy.get("clause") if remedy else None
 
     @property
     def variant(self) -> str | None:
@@ -78,27 +87,41 @@ def bundle_for(root: str | Path = "runs", day: date | None = None) -> dict[str, 
 
 
 def build_plan(cases: list[Case], models: list[providers.ModelSpec], *,
-               variants: int | None = None, runs: int | None = None) -> list[Execution]:
-    """Every call the profile asks for, in a stable order."""
+               variants: int | None = None, runs: int | None = None,
+               remedy_arm: bool = False) -> list[Execution]:
+    """Every call the profile asks for, in a stable order.
+
+    `remedy_arm` doubles the cases that carry a remedy: the same case is run without
+    the clause, then with it. A remedy is Draft until a campaign has measured it, so
+    the second arm only runs in a campaign.
+    """
     plan: list[Execution] = []
     for case in cases:
+        arms = ["base"]
+        if remedy_arm and case.data.get("remedy"):
+            arms.append("remedy")
         count = len(case.variants) or 1
         if variants:
             count = min(count, variants)
-        for variant_index in range(count):
-            for run_index in range(runs or case.runs):
-                for model in models:
-                    plan.append(Execution(case, variant_index, run_index, model))
+        for arm in arms:
+            for variant_index in range(count):
+                for run_index in range(runs or case.runs):
+                    for model in models:
+                        plan.append(Execution(case, variant_index, run_index, model, arm))
     return plan
 
 
-def build_messages(case: Case, variant: str | None) -> list[dict[str, Any]]:
+def build_messages(case: Case, variant: str | None, clause: str | None = None) -> list[dict[str, Any]]:
     """The conversation as the model sees it, with tool results simulated.
 
     A `tool_result` turn becomes the pair a provider expects: an assistant message
     asking for the tool, then the tool answer. Nothing is ever really called.
+    `clause` is the remedy added to the system prompt of the second arm.
     """
-    messages: list[dict[str, Any]] = [{"role": "system", "content": case.data["system_prompt"]}]
+    system = case.data["system_prompt"]
+    if clause:
+        system = system.rstrip() + "\n\n" + clause.strip()
+    messages: list[dict[str, Any]] = [{"role": "system", "content": system}]
     turns = list(case.data["turns"])
     last_user = max((i for i, t in enumerate(turns) if t["role"] == "user"), default=None)
     for position, turn in enumerate(turns):
@@ -208,7 +231,7 @@ def execute(plan: list[Execution], *, out: str | Path = "runs", cache: Cache | N
             return
         case = execution.case
         variant = execution.variant
-        messages = build_messages(case, variant)
+        messages = build_messages(case, variant, execution.clause)
         # The case declares the parameters it wants; models.yaml may override them,
         # because that is where a model's own constraints are declared (some models
         # accept only temperature=1). The record keeps what was actually sent.
@@ -217,7 +240,8 @@ def execute(plan: list[Execution], *, out: str | Path = "runs", cache: Cache | N
         params = {**case_params, **execution.model.params}
         tools = providers.tool_definitions(
             case.data.get("tools", []), lambda ref: _resolve_tool_schema(ref, case.path))
-        key = fingerprint(messages, params, execution.model.litellm_id)
+        key = fingerprint(messages, params, execution.model.litellm_id,
+                          execution.run_index, execution.arm)
 
         cached = cache.get(key)
         if cached is not None:
@@ -248,6 +272,7 @@ def execute(plan: list[Execution], *, out: str | Path = "runs", cache: Cache | N
             "variant_index": execution.variant_index,
             "variant": variant,
             "run_index": execution.run_index,
+            "arm": execution.arm,
             "model": execution.model.name,
             "messages": messages,
             "response": completion.text,
@@ -262,6 +287,7 @@ def execute(plan: list[Execution], *, out: str | Path = "runs", cache: Cache | N
         record = {
             "execution": execution.key,
             **case.identity(),
+            "arm": execution.arm,
             "model": execution.model.name,
             "model_returned": completion.model_returned,
             "params": params,
@@ -284,6 +310,8 @@ def execute(plan: list[Execution], *, out: str | Path = "runs", cache: Cache | N
             chain.append(record)
             summary.results.append({
                 "case": f"{case.rule}/{case.id}",
+                "rule": case.rule,
+                "arm": execution.arm,
                 "answered_with_tool_call": bool(completion.tool_calls) and not completion.text.strip(),
                 "model": execution.model.name,
                 "variant_index": execution.variant_index,

@@ -6,7 +6,7 @@ A test case is a self-contained YAML file: system prompt, tool schemas, **simula
 
 Without this, "testable" stays a promise.
 
-> **Status: step T2.** The case format, `rimi lint` and the engine (`rimi estimate`, `rimi run`) are here: cases run against real models through LiteLLM, deterministic checks decide, and every call is recorded in a chained log. The report, `rimi conform` and `rimi verify` arrive in the following steps — see [Roadmap](#roadmap). Commands that are not implemented say so and exit with code 2.
+> **Status: step T3.** The case format, `rimi lint` and the engine and the report are here: cases run against real models through LiteLLM, deterministic checks decide, verdicts come with a confidence interval, and every call is recorded in a chained log. `rimi verify` and the proof bundle arrive in the following steps — see [Roadmap](#roadmap). Commands that are not implemented say so and exit with code 2.
 
 ## Install
 
@@ -86,6 +86,40 @@ tags: [pricing, missing-data]
 
 Two complete examples live in [`cases/`](cases). The format is fixed by [`schemas/case.schema.json`](schemas/case.schema.json) and documented in [docs/writing-cases.md](docs/writing-cases.md).
 
+## Verdicts: three outcomes, never two
+
+The test protocol asks for 50 runs at a 95% threshold — 48 successes. As a plain comparison that decides nothing: two teams running the same campaign on a system truly at 96% reach **opposite verdicts 43.8% of the time**, and a *perfect* system judged with a 3% false-negative rate fails 18.9% of the time.
+
+So a verdict is given per obligation, with an exact Clopper-Pearson interval:
+
+| outcome | when |
+| --- | --- |
+| **pass** | the lower bound is above the threshold |
+| **fail** | the upper bound is below it |
+| **inconclusive** | the interval straddles it — run more, do not decide |
+
+```bash
+rimi verdict --successes 48 --trials 50
+# INCONCLUSIVE — 48/50 — [0.879, 0.993] straddles 95%; 74 more perfect run(s) would settle it
+```
+
+A perfect score establishes 95% in **59 runs** one-sided — the question being "is the rate above the bar?", not "where is the rate?" (72 is the two-sided figure, and the report says which it used). `rimi run --runs N` sets the runs per variant; a campaign warns when its trials cannot settle anything.
+
+## Findings carry what would settle them
+
+A failure is reported in five fields: `fact` (the answer, verbatim), `source` (the tool result, primary trace), `rule` (identifier, version, obligation), `diagnosis` (the mechanism, declared as interpretation) and **`what_would_settle_it`** — the measurement, data or decision that closes the question. A finding without the fifth field is reported as incomplete.
+
+A case may carry a **remedy** clause. In a campaign it runs as a second arm — without the clause, then with it — and the report puts the two columns side by side with their intervals. A remedy stays Draft until a campaign has measured it; everything else lands under *detected, no validated remedy*.
+
+```yaml
+remedy:
+  id: CONV-038-r1
+  status: draft
+  clause: |
+    Before announcing a result, compare it with the previous one. If it is
+    unchanged, say so and name what blocks it.
+```
+
 ## Checks
 
 Deterministic checks decide first: no second model, so no bias and no extra cost.
@@ -97,6 +131,8 @@ Deterministic checks decide first: no second model, so no bias and no extra cost
 | `no_new_numbers` | No number that appears neither in the request nor in the tool results |
 | `announces_default` | The default value kept is announced (CONV-001, CONV-015) |
 | `tool_called` / `tool_not_called` | The expected tool was called, with the expected arguments |
+| `states_unchanged` | The response says the request produced no change, and names what blocks it (CONV-038) |
+| `no_false_effect` | An unchanged result is not presented as the outcome of the request (CONV-038) |
 | `regex` | Safety net, when no typed check fits |
 | `judge` | Published grid, LLM judge — **never alone**, and measured by `rimi judge-audit` |
 
@@ -127,8 +163,8 @@ The chained log, the hashes and the bundle layout are already in place ([`src/ri
 | --- | --- | --- |
 | T1 | Skeleton, case schema, `rimi lint`, two example cases, unit tests | **done** |
 | T2 | Engine: plan, LiteLLM, cache, deterministic checks, `rimi run` | **done** |
-| T3 | Report md/json/csv, `rimi conform`, thresholds, exit codes | next |
-| T4 | Test cases for wave 1 (15 rules) | planned |
+| T3 | Report md/json/csv, `rimi conform`, three-outcome verdicts, remedy arm | **done** |
+| T4 | Test cases for wave 1 (15 rules) | next |
 | T5 | First public campaign, 5 models, 3 providers | planned |
 | T6 | GitHub action, badge, scheduled campaign | planned |
 | T7–T10 | Self-proof bundle and `rimi verify`, pre-registered manifest, keyless signature, anchoring adapters | planned |

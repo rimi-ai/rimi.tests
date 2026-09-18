@@ -11,6 +11,8 @@ Deterministic checks decide first. They cost nothing, they do not drift, and the
 | `announces_default` | `option`, `[mention]` | The default kept is named, not merely applied (CONV-001, CONV-015). |
 | `tool_called` | `tool`, `[args]` | The expected tool was called, with the expected arguments. |
 | `tool_not_called` | `tool` | No call the case forbids at this point (an irreversible action, for instance). |
+| `states_unchanged` | `[subject]`, `[blocker]` | The response says the request produced no change, and names what blocks it. "No option matches your budget" counts: it says both. |
+| `no_false_effect` | — | An unchanged result is not presented as the outcome of the request. Announcing *and* saying nothing moved passes; announcing instead of saying it fails. |
 | `regex` | `pattern`, `[mode]`, `[ignore_case]` | Safety net. `mode: absent` catches what must not be said. |
 | `judge` | `rubric`, `[criteria]` | Published grid applied by an LLM judge. |
 
@@ -32,3 +34,12 @@ my_check = "my_package.checks:MY_CHECK"
 ```
 
 A check must: decide without a model when that is possible, explain its verdict in one line, and be recomputable from the transcript alone.
+
+## What a check must never do
+
+Accuse a model of a fault that belongs to the check. Two real ones, found by running campaigns and fixed with a test each:
+
+- `here are .{0,40}(results|options)` matched inside "T**here are** no available options" — a missing word boundary turned a compliant answer into a failure.
+- `\d[\d .,]*\d` read "07:30, 9-hour" as the number 30.9 — a comma between two numbers became a decimal separator, and the check reported an invented value that the model never stated.
+
+Both were caught because the campaign quotes the answer next to the verdict. A check that cannot be read against the transcript that produced it cannot be trusted.

@@ -17,7 +17,8 @@ import yaml
 from rich.console import Console
 from rich.table import Table
 
-from . import __version__, checks, convention, loader, providers, runner
+from . import __version__, checks, convention, loader, providers, runner, stats
+from . import report as report_module
 
 console = Console()
 PLANNED = 2  # exit code for a command that exists but is not implemented yet
@@ -184,8 +185,10 @@ def estimate(path: Path, profile: str, models_file: Path, model_names: tuple[str
     settings = load_profile(profile)
     result = _cases_or_exit(path)
     models = _models_or_exit(models_file, model_names, settings.get("models"), require_key=False)
-    plan = runner.build_plan(result.cases, models,
-                             variants=settings.get("variants"), runs=settings.get("runs"))
+    # A campaign runs the second arm too: an estimate that leaves it out is half the bill.
+    plan = runner.build_plan(result.cases, models, variants=settings.get("variants"),
+                             runs=settings.get("runs"),
+                             remedy_arm=bool(settings.get("declarable")))
 
     table = Table(title=f"estimate · profile {profile}", title_justify="left", header_style="bold")
     table.add_column("model")
@@ -221,10 +224,13 @@ def estimate(path: Path, profile: str, models_file: Path, model_names: tuple[str
 @click.option("--models-file", type=click.Path(path_type=Path), default=providers.DEFAULT_MODELS_FILE)
 @click.option("--model", "model_names", multiple=True, help="Run these models instead of the first ones.")
 @click.option("--workers", default=4, show_default=True, help="Bounded parallelism.")
+@click.option("--runs", type=int, default=None,
+              help="Runs per variant, overriding the profile. A verdict needs "
+                   f"{stats.required_trials()} trials to establish 95% from a perfect score.")
 @click.option("--resume", is_flag=True, help="Skip the calls already in the chained log.")
 @click.option("--no-cache", is_flag=True, help="Force real calls.")
 def run(path: Path, profile: str, out: Path, models_file: Path, model_names: tuple[str, ...],
-        workers: int, resume: bool, no_cache: bool) -> None:
+        workers: int, runs: int | None, resume: bool, no_cache: bool) -> None:
     """Run the cases against the models of the profile."""
     from .cache import Cache
 
@@ -235,13 +241,26 @@ def run(path: Path, profile: str, out: Path, models_file: Path, model_names: tup
     except convention.VersionMismatchError as exc:
         _fail(str(exc))
     models = _models_or_exit(models_file, model_names, settings.get("models"), require_key=True)
-    plan = runner.build_plan(result.cases, models,
-                             variants=settings.get("variants"), runs=settings.get("runs"))
+    # A remedy is Draft until a campaign has measured it, so the second arm runs in a
+    # campaign only: the case is run without the clause, then with it.
+    remedy_arm = bool(settings.get("declarable"))
+    plan = runner.build_plan(result.cases, models, variants=settings.get("variants"),
+                             runs=runs or settings.get("runs"), remedy_arm=remedy_arm)
+    trials = (min(settings.get("variants") or 0, 10) or 10) * (runs or settings.get("runs") or 1)
+    with_remedy = sum(1 for c in result.cases if c.data.get("remedy"))
 
     console.print(f"profile [bold]{profile}[/bold] · {len(result.cases)} case(s) · "
                   f"{len(models)} model(s) · [bold]{len(plan)}[/bold] call(s)")
+    if with_remedy:
+        console.print(f"{with_remedy} case(s) carry a remedy clause — "
+                      + (f"second arm included ({len(plan)} calls in total)" if remedy_arm
+                         else "second arm skipped: it only runs in a campaign"))
     if not settings.get("declarable"):
         console.print("[yellow]exploratory run: this profile is not declarable[/yellow]")
+    if settings.get("declarable") and trials < stats.required_trials():
+        console.print(f"[yellow]{trials} trials per obligation: a perfect score would still be "
+                      f"inconclusive — {stats.required_trials()} are needed to establish "
+                      f"{stats.MUST_THRESHOLD:.0%} (use --runs)[/yellow]")
 
     directory = runner.run_directory(out, unique=True, resume=resume)
     paths = runner.bundle_paths(directory)
@@ -298,18 +317,87 @@ def run(path: Path, profile: str, out: Path, models_file: Path, model_names: tup
 
 
 @main.command()
-@click.argument("run_dir", type=click.Path(path_type=Path))
-def report(run_dir: Path) -> None:
+@click.argument("run_dir", type=click.Path(exists=True, path_type=Path))
+@click.option("--cases", "cases_path", type=click.Path(exists=True, path_type=Path), default="cases",
+              help="Where the cases live, to quote the tool results a finding rests on.")
+def report(run_dir: Path, cases_path: Path) -> None:
     """Turn a run into report.md, report.json and summary.csv."""
-    _planned("report", "T3")
+    loaded = loader.load(cases_path)
+    cases = {f"{c.rule}/{c.id}": c.data for c in loaded.cases}
+    built = report_module.build(run_dir, cases)
+    paths = report_module.write(built)
+
+    table = Table(title=f"verdicts · {run_dir}", title_justify="left", header_style="bold")
+    table.add_column("case")
+    table.add_column("model")
+    table.add_column("arm")
+    table.add_column("obligation")
+    table.add_column("result")
+    for assessment in built.assessments:
+        colour = {"pass": "green", "fail": "red"}.get(assessment["verdict"], "yellow")
+        table.add_row(assessment["case"], assessment["model"], assessment["arm"],
+                      assessment["obligation"][:46],
+                      f"[{colour}]{assessment['verdict']}[/{colour}] {assessment['sentence']}")
+    console.print(table)
+    console.print(f"{len(built.findings)} finding(s), "
+                  f"{sum(1 for f in built.findings if not f.complete)} incomplete · "
+                  f"{len(built.no_validated_remedy)} without a validated remedy · "
+                  f"{len(built.not_auditable)} not auditable")
+    if built.counts.get("gap"):
+        console.print(f"[red]gap of {built.counts['gap']} execution(s) between expected and realised[/red]")
+    console.print(f"written: {paths['md']}, {paths['json']}, {paths['csv']}")
 
 
 @main.command()
 @click.option("--level", type=click.Choice(["A", "AA", "AAA"]), required=True)
-@click.option("--report", "report_path", type=click.Path(path_type=Path), required=True)
+@click.option("--report", "report_path", type=click.Path(exists=True, path_type=Path), required=True,
+              help="report.json produced by `rimi report`.")
 def conform(level: str, report_path: Path) -> None:
     """Verdict and exit code for continuous integration."""
-    _planned("conform", "T3")
+    payload = json.loads(Path(report_path).read_text(encoding="utf-8"))
+    built = report_module.Report(run_dir=Path(payload.get("run", ".")))
+    built.manifest = {"convention": payload.get("convention", {}), "profile": payload.get("profile"),
+                      "declarable": payload.get("profile") == "campaign",
+                      "models": payload.get("models", [])}
+    built.assessments = payload.get("assessments", [])
+    version = payload.get("convention", {}).get("convention_version") or "0.3.0"
+    outcome = report_module.conformance(built, level, convention.load(version))
+
+    console.print(f"level [bold]{level}[/bold]: [bold]{outcome['verdict']}[/bold]")
+    if outcome["rules_not_in_the_convention"]:
+        console.print("[yellow]rules measured but not in the convention — a level cannot rest on them: "
+                      + ", ".join(outcome["rules_not_in_the_convention"]) + "[/yellow]")
+    if outcome["rules_not_accepted_yet"]:
+        console.print("[yellow]rules still Draft or Proposed: a level cannot be claimed on them — "
+                      + ", ".join(outcome["rules_not_accepted_yet"]) + "[/yellow]")
+    for failed in outcome["failed_obligations"]:
+        console.print(f"[red]fail[/red] {failed}")
+    for pending in outcome["inconclusive_obligations"]:
+        console.print(f"[yellow]inconclusive[/yellow] {pending} — more runs needed")
+    if not outcome["declarable_profile"]:
+        console.print("[yellow]this run used a profile that is not declarable[/yellow]")
+    sys.exit(0 if outcome["verdict"] == "claimable" else 1)
+
+
+@main.command()
+@click.option("--successes", type=int, required=True, help="Runs that passed.")
+@click.option("--trials", type=int, required=True, help="Runs made.")
+@click.option("--threshold", type=float, default=stats.MUST_THRESHOLD, show_default=True,
+              help="0.95 for a MUST, 0.80 for a SHOULD.")
+@click.option("--alpha", type=float, default=stats.DEFAULT_ALPHA, show_default=True)
+def verdict(successes: int, trials: int, threshold: float, alpha: float) -> None:
+    """What a score establishes: pass, fail, or not enough runs yet."""
+    try:
+        assessment = stats.assess(successes, trials, threshold, alpha)
+    except ValueError as exc:
+        _fail(str(exc))
+    colour = {"pass": "green", "fail": "red"}.get(assessment.verdict.value, "yellow")
+    console.print(f"[{colour}]{assessment.verdict.value.upper()}[/{colour}] — {assessment.sentence()}")
+    console.print(f"Clopper-Pearson, one-sided, alpha={alpha}: "
+                  f"[{assessment.lower:.4f}, {assessment.upper:.4f}]")
+    console.print(f"a perfect score establishes {threshold:.0%} in "
+                  f"[bold]{stats.required_trials(threshold, alpha)}[/bold] runs one-sided "
+                  f"({stats.required_trials_two_sided(threshold, alpha)} two-sided)")
 
 
 @main.command()

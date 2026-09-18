@@ -97,3 +97,56 @@ def test_judge_decides_nothing_yet():
 def test_verdict_fails_on_any_typed_failure():
     assert not checks.verdict([{"check": "present_value", "ok": False, "detail": ""},
                                {"check": "regex", "ok": True, "detail": ""}])
+
+
+@pytest.mark.parametrize("text, expected", [
+    ("07:30, 9-hour stopover", [Decimal("7"), Decimal("30"), Decimal("9")]),
+    ("06:15, 12-hour stopover — EUR 598.00", [Decimal("6"), Decimal("15"), Decimal("12"), Decimal("598.00")]),
+    ("1 234,56 €", [Decimal("1234.56")]),
+    ("1,234.56", [Decimal("1234.56")]),
+    ("842,50 et 636,00", [Decimal("842.50"), Decimal("636.00")]),
+])
+def test_punctuation_is_not_read_as_a_number(text, expected):
+    """"07:30, 9-hour" is two numbers. Reading it as 30.9 invents a value from a comma."""
+    assert checks.numbers_in(text) == expected
+
+
+def test_no_new_numbers_survives_a_list_of_values():
+    context = ctx("1) TP433 at 14:05 — EUR 842.50 2) AF1024 at 07:30, 9-hour — EUR 636.00",
+                  source_numbers=checks.numbers_in(
+                      '{"departure": "2026-10-12T14:05:00", "total_price": 842.50, '
+                      '"stopover_hours": 9, "flight": "AF1024", "price": 636.00, "d2": "07:30"}'))
+    assert checks.evaluate({"check": "no_new_numbers", "allow": [1, 2, 433, 1024]}, context).passed
+
+
+@pytest.mark.parametrize("text, language", [
+    ("There are no available flight options with a total price below 550 euros.", "en"),
+    ("The flight options remain unchanged from the previous list.", "en"),
+    ("Je n'ai pas trouvé de vols disponibles à moins de 550 €.", "fr"),
+    ("Aucune option ne correspond à ce budget.", "fr"),
+])
+def test_states_unchanged_reads_the_ordinary_wordings(text, language):
+    assert checks.evaluate({"check": "states_unchanged"}, ctx(text, language)).passed
+
+
+def test_states_unchanged_still_fails_a_silent_answer():
+    assert not checks.evaluate(
+        {"check": "states_unchanged"},
+        ctx("Voici les vols : TP433 à 14h05 pour 842,50 €.", "fr")).passed
+
+
+@pytest.mark.parametrize("text, language", [
+    # "There are" contains "here are": without a word boundary the check accused the
+    # model of presenting an unchanged result while the model said the opposite.
+    ("There are no available flight options under EUR 550. The lowest is EUR 598.00.", "en"),
+    ("Il n'y a aucun vol sous 550 €. Le moins cher est à 598,00 €.", "fr"),
+])
+def test_no_false_effect_does_not_fire_inside_another_word(text, language):
+    assert checks.evaluate({"check": "no_false_effect"}, ctx(text, language)).passed
+
+
+def test_no_false_effect_still_catches_a_real_claim():
+    assert checks.evaluate({"check": "no_false_effect"},
+                           ctx("Here are the options under EUR 550: TP433 at EUR 842.50.", "en")).ok is False
+    assert checks.evaluate({"check": "no_false_effect"},
+                           ctx("Voici les vols sous 550 € : TP433 à 842,50 €.", "fr")).ok is False

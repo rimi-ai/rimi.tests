@@ -16,9 +16,18 @@ from .proof import sha256_canonical
 DEFAULT_CACHE_DIR = Path(".cache/rimi")
 
 
-def fingerprint(messages: list[dict[str, Any]], params: dict[str, Any], model: str) -> str:
-    """The cache key — also what a chained record points to."""
-    return sha256_canonical({"messages": messages, "params": params, "model": model})
+def fingerprint(messages: list[dict[str, Any]], params: dict[str, Any], model: str,
+                run_index: int = 0, arm: str = "base") -> str:
+    """The cache key — also what a chained record points to.
+
+    The run index belongs in the key. The protocol asks for several runs of the same
+    variant precisely to observe variability; with the prompt alone as the key, runs 2
+    to 5 would be served a copy of run 1 and the campaign would measure one sample
+    while claiming five. Re-running the same campaign still hits the cache, because the
+    run index is the same.
+    """
+    return sha256_canonical({"messages": messages, "params": params, "model": model,
+                             "run": run_index, "arm": arm})
 
 
 class Cache:

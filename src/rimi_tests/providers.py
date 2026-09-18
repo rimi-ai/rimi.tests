@@ -9,6 +9,7 @@ to judge whether the campaign was what it claims to be.
 from __future__ import annotations
 
 import os
+import random
 import time
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -125,25 +126,50 @@ def tool_definitions(case_tools: list[dict[str, Any]], resolve) -> list[dict[str
     return definitions
 
 
+RATE_LIMIT_RETRIES = 5
+RATE_LIMIT_BASE_DELAY = 2.0
+
+
+def _is_rate_limit(exc: Exception) -> bool:
+    """A provider that says "slow down" is not a failure, it is a wait."""
+    name = type(exc).__name__.lower()
+    return "ratelimit" in name or "429" in str(exc)[:200]
+
+
 def complete(messages: list[dict[str, Any]], model: ModelSpec, params: dict[str, Any],
-             tools: list[dict[str, Any]] | None = None, timeout: int = 120) -> Completion:
-    """One call. Raises `ProviderError` with a readable reason; never logs the key."""
+             tools: list[dict[str, Any]] | None = None, timeout: int = 120,
+             retries: int = RATE_LIMIT_RETRIES) -> Completion:
+    """One call. Raises `ProviderError` with a readable reason; never logs the key.
+
+    Rate limits are waited out, not counted as failures: a campaign that loses calls to
+    a token-per-minute ceiling reports fewer executions than it announced, and the gap
+    would have to be explained. Backoff is exponential with jitter.
+    """
     import litellm  # imported late: it is heavy, and `rimi lint` does not need it
 
     if not model.key_present():
         raise ProviderError(f"{model.key_variable or 'the API key'} is not set for {model.name}")
 
     started = time.monotonic()
-    try:
-        response = litellm.completion(
-            model=model.litellm_id,
-            messages=messages,
-            tools=tools or None,
-            timeout=timeout,
-            **params,
-        )
-    except Exception as exc:  # litellm raises provider-specific errors
-        raise ProviderError(f"{model.name}: {type(exc).__name__}: {exc}") from exc
+    attempt = 0
+    while True:
+        try:
+            response = litellm.completion(
+                model=model.litellm_id,
+                messages=messages,
+                tools=tools or None,
+                timeout=timeout,
+                **params,
+            )
+            break
+        except Exception as exc:  # litellm raises provider-specific errors
+            if _is_rate_limit(exc) and attempt < retries:
+                delay = RATE_LIMIT_BASE_DELAY * (2 ** attempt) + random.uniform(0, 1)
+                time.sleep(delay)
+                attempt += 1
+                continue
+            suffix = f" after {attempt} retr{'y' if attempt == 1 else 'ies'}" if attempt else ""
+            raise ProviderError(f"{model.name}: {type(exc).__name__}{suffix}: {exc}") from exc
     latency_ms = int((time.monotonic() - started) * 1000)
 
     payload = response.model_dump() if hasattr(response, "model_dump") else dict(response)

@@ -149,8 +149,17 @@ def validate(case: Case, *, strict_variants: bool = False) -> tuple[Case, list[P
         problems.append(Problem(case.path, "error", str(exc), "convention_version"))
     else:
         if not index.has(case.rule):
-            problems.append(Problem(case.path, "error",
-                                    f"rule {case.rule} does not exist in convention {index.version}", "rule"))
+            proposed = case.data.get("proposed_in")
+            if proposed:
+                # A rule needs a real case and a test case before it can be Proposed:
+                # a case therefore exists before its rule, and says where it is discussed.
+                problems.append(Problem(case.path, "warning",
+                                        f"rule {case.rule} is not in convention {index.version}; "
+                                        f"proposed in {proposed}", "rule"))
+            else:
+                problems.append(Problem(case.path, "error",
+                                        f"rule {case.rule} does not exist in convention "
+                                        f"{index.version}", "rule"))
         else:
             rule = index.rule(case.rule)
             rule_sha256 = rule.sha256
