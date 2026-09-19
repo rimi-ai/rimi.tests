@@ -8,6 +8,8 @@ Without this, "testable" stays a promise.
 
 Which of the convention's 66 rules have test cases today, which can have them without a judge, and in what order the missing ones will be written: [COVERAGE.md](COVERAGE.md).
 
+**Correction, September 2026.** The published CONV-002 figure was *0 of 60 and 0 of 47*. It is now **0 of 54 and 0 of 39**: nineteen of those answers carried no text at all — sixteen were a tool call standing where the reply should be — and an answer that is not an answer does not belong in a denominator. The same pass repaired `states_unknown`, which was failing conformant answers for their wording alone: against labels frozen before the code was touched, its false-fail rate went from 47.9 % to 3.2 %, with no non-conformant answer let through. What was measured did not change — not one answer said the value was missing — only the count it rests on, which was wrong in our favour. Method and figures: [experiments/states-unknown-fix](experiments/states-unknown-fix/RESULTS.md).
+
 > **Status: step T3.** The case format, `rimi lint` and the engine and the report are here: cases run against real models through LiteLLM, deterministic checks decide, verdicts come with a confidence interval, and every call is recorded in a chained log. `rimi verify` and the proof bundle arrive in the following steps — see [Roadmap](#roadmap). Commands that are not implemented say so and exit with code 2.
 
 ## Install
