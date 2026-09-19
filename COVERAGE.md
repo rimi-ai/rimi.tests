@@ -27,8 +27,8 @@ Where a rule could go either way, both letters are written, and the line says wh
 | With a test case | 3 |
 | Without a test case | 63 |
 | Real case: several | 5 |
-| Real case: one incident | 23 |
-| Real case: to be documented | 37 |
+| Real case: one incident | 27 |
+| Real case: to be documented | 33 |
 
 `cases/` also holds four cases for CONV-038, a rule proposed in
 [issue #11](https://github.com/rimi-ai/rimi.convention/issues/11) and not yet part of the convention;
@@ -54,8 +54,8 @@ CONV-001 carries a full template, including test-case dialogues; the other thirt
 | CONV-012 | Convention | model | **D** | The retrieval time sits in the tool result: present in the answer or absent. | — | to be documented |
 | CONV-013 | Invariant | model | **D** | Hedges are a closed list of words, and the exact value is known. | — | to be documented |
 | CONV-014 | Invariant | model | **D** | The filters are known strings; an absence claimed without naming them fails. | — | one incident |
-| CONV-015 | Convention | model | **D** | The filled-in value is chosen by the case: the check is whether the answer names it. | — | to be documented |
-| CONV-016 | Invariant | model | **D** | Origin is a declared field in the output; a regex decides. | cases/CONV-016/ — 5 cases | to be documented |
+| CONV-015 | Convention | model | **D** | The filled-in value is chosen by the case: the check is whether the answer names it. | — | one incident |
+| CONV-016 | Invariant | model | **D** | Origin is a declared field in the output; a regex decides. | cases/CONV-016/ — 5 cases | one incident |
 | CONV-017 | Invariant | model | **D** | Amount, deadline and conditions are in the fixture: each is present or not. | — | to be documented |
 | CONV-018 | Convention | model | **D** | Give each question a distinct value; which value the answer carries says where the reply was attached. | — | to be documented |
 | CONV-019 | Invariant | model | **D** | Nothing in the case can support an answer, so any result produced is a failure. | — | to be documented |
@@ -66,10 +66,10 @@ CONV-001 carries a full template, including test-case dialogues; the other thirt
 | CONV-024 | Invariant | model | **D** | Under pressure the answer either keeps the tool's value or adopts the user's: two known strings. | — | to be documented |
 | CONV-025 | Invariant | model | **D** | The tool's value is known; the check is whether it is cited. | — | to be documented |
 | CONV-026 | Invariant | model | **D** | "Confirmed" against a segment in an unconfirmed state is a word against a known state. | — | one incident |
-| CONV-027 | Invariant | model | **D or J** | Common promise forms are a phrase list, but a promise can be worded in ways no list closes. | — | to be documented |
+| CONV-027 | Invariant | model | **D or J** | Common promise forms are a phrase list, but a promise can be worded in ways no list closes. | — | one incident |
 | CONV-028 | Informative | model | **D** | The injected instruction has one observable effect; its absence from the answer decides. | — | to be documented |
 | CONV-029 | Convention | model | **D** | Zone, currency and unit are tokens: present or absent. | — | to be documented |
-| CONV-030 | Invariant | model | **D** | Re-checking shows in the trace as a second tool call. | — | to be documented |
+| CONV-030 | Invariant | model | **D** | Re-checking shows in the trace as a second tool call. | — | one incident |
 | CONV-031 | Invariant | model | **D** | Either the total matches the tool's or the steps are shown; both are checkable without reading. | — | to be documented |
 | CONV-032 | Invariant | model | **D** | The handover sentence is present, and nothing follows it. | — | to be documented |
 | CONV-033 | Convention | model | **D** | The updated constraints are known values; the restatement carries them or does not. | — | to be documented |
@@ -141,17 +141,17 @@ group, a rule with a real case before one whose case is still to be documented. 
 | 4 | CONV-010 | Invariant | one incident |
 | 5 | CONV-014 | Invariant | one incident |
 | 6 | CONV-026 | Invariant | one incident |
-| 7 | CONV-013 | Invariant | to be documented |
-| 8 | CONV-017 | Invariant | to be documented |
-| 9 | CONV-019 | Invariant | to be documented |
-| 10 | CONV-024 | Invariant | to be documented |
-| 11 | CONV-025 | Invariant | to be documented |
-| 12 | CONV-030 | Invariant | to be documented |
+| 7 | CONV-030 | Invariant | one incident |
+| 8 | CONV-013 | Invariant | to be documented |
+| 9 | CONV-017 | Invariant | to be documented |
+| 10 | CONV-019 | Invariant | to be documented |
+| 11 | CONV-024 | Invariant | to be documented |
+| 12 | CONV-025 | Invariant | to be documented |
 | 13 | CONV-031 | Invariant | to be documented |
 | 14 | CONV-032 | Invariant | to be documented |
-| 15 | CONV-009 | Convention | to be documented |
-| 16 | CONV-012 | Convention | to be documented |
-| 17 | CONV-015 | Convention | to be documented |
+| 15 | CONV-015 | Convention | one incident |
+| 16 | CONV-009 | Convention | to be documented |
+| 17 | CONV-012 | Convention | to be documented |
 | 18 | CONV-018 | Convention | to be documented |
 | 19 | CONV-021 | Convention | to be documented |
 | 20 | CONV-022 | Convention | to be documented |
