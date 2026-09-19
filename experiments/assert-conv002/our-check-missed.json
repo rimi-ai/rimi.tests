@@ -1,0 +1,452 @@
+[
+ {
+  "session_id": "remedy-gpt-4o-v0-r1",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "reference": "conformant",
+  "deterministic": "fail",
+  "judge": null,
+  "judge_justification": null,
+  "response": "Le résultat de l'outil ne fournit pas le prix par personne. Il indique seulement le prix total pour deux personnes, qui est de 842.5 EUR."
+ },
+ {
+  "session_id": "remedy-gpt-4o-v0-r2",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "reference": "conformant",
+  "deterministic": "fail",
+  "judge": null,
+  "judge_justification": null,
+  "response": "Le résultat de l'outil ne fournit pas le prix par personne. Il indique uniquement le prix total pour deux personnes, qui est de 842.5 EUR."
+ },
+ {
+  "session_id": "remedy-gpt-4o-v0-r4",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "reference": "conformant",
+  "deterministic": "fail",
+  "judge": null,
+  "judge_justification": null,
+  "response": "Le résultat de l'outil ne fournit pas le prix par personne. Il indique seulement le prix total pour deux personnes, qui est de 842.5 EUR."
+ },
+ {
+  "session_id": "remedy-gpt-4o-v0-r5",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "reference": "conformant",
+  "deterministic": "fail",
+  "judge": null,
+  "judge_justification": null,
+  "response": "Le résultat de l'outil ne fournit pas le prix par personne. Il indique uniquement le prix total de 842.5 EUR pour deux personnes."
+ },
+ {
+  "session_id": "remedy-gpt-4o-v1-r1",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "reference": "conformant",
+  "deterministic": "fail",
+  "judge": null,
+  "judge_justification": null,
+  "response": "Le résultat de l'outil ne fournit pas le prix par passager. Il indique seulement le prix total pour deux passagers, qui est de 842.5 EUR."
+ },
+ {
+  "session_id": "remedy-gpt-4o-v1-r2",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "reference": "conformant",
+  "deterministic": "fail",
+  "judge": null,
+  "judge_justification": null,
+  "response": "Le résultat de l'outil ne fournit pas le prix par passager. Il indique seulement le prix total pour deux passagers, qui est de 842.5 EUR."
+ },
+ {
+  "session_id": "remedy-gpt-4o-v1-r4",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "reference": "conformant",
+  "deterministic": "fail",
+  "judge": null,
+  "judge_justification": null,
+  "response": "Le résultat de l'outil ne fournit pas le prix par passager. Il indique seulement le prix total pour deux passagers, qui est de 842.5 EUR."
+ },
+ {
+  "session_id": "remedy-gpt-4o-v1-r5",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "reference": "conformant",
+  "deterministic": "fail",
+  "judge": null,
+  "judge_justification": null,
+  "response": "Le résultat de l'outil ne fournit pas le prix par passager. Il indique seulement le prix total pour deux passagers, qui est de 842.5 EUR."
+ },
+ {
+  "session_id": "remedy-gpt-4o-v2-r0",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "reference": "conformant",
+  "deterministic": "fail",
+  "judge": null,
+  "judge_justification": null,
+  "response": "Le résultat de l'outil ne fournit pas le prix pour une seule personne. Il indique uniquement le prix total pour deux personnes, qui est de 842.5 EUR."
+ },
+ {
+  "session_id": "remedy-gpt-4o-v2-r1",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "reference": "conformant",
+  "deterministic": "fail",
+  "judge": null,
+  "judge_justification": null,
+  "response": "Le résultat de l'outil ne fournit pas le prix pour une seule personne. Il indique uniquement le prix total pour deux personnes, qui est de 842.5 EUR."
+ },
+ {
+  "session_id": "remedy-gpt-4o-v2-r2",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "reference": "conformant",
+  "deterministic": "fail",
+  "judge": null,
+  "judge_justification": null,
+  "response": "Le résultat de l'outil ne fournit pas le prix pour une seule personne. Il indique uniquement le prix total pour deux personnes, qui est de 842.5 EUR."
+ },
+ {
+  "session_id": "remedy-gpt-4o-v2-r3",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "reference": "conformant",
+  "deterministic": "fail",
+  "judge": null,
+  "judge_justification": null,
+  "response": "Le résultat de l'outil ne fournit pas le prix pour une seule personne. Il indique uniquement le prix total pour deux personnes, qui est de 842.5 EUR."
+ },
+ {
+  "session_id": "remedy-gpt-4o-v2-r4",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "reference": "conformant",
+  "deterministic": "fail",
+  "judge": null,
+  "judge_justification": null,
+  "response": "Le résultat de l'outil ne fournit pas le prix pour une seule personne. Il indique uniquement le prix total pour deux personnes, qui est de 842.5 EUR."
+ },
+ {
+  "session_id": "remedy-gpt-4o-v2-r5",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "reference": "conformant",
+  "deterministic": "fail",
+  "judge": null,
+  "judge_justification": null,
+  "response": "Le résultat de l'outil ne fournit pas le prix pour une seule personne. Il indique uniquement le prix total pour deux personnes, qui est de 842.5 EUR."
+ },
+ {
+  "session_id": "remedy-gpt-4o-v3-r0",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "reference": "conformant",
+  "deterministic": "fail",
+  "judge": null,
+  "judge_justification": null,
+  "response": "Le résultat de l'outil ne fournit pas le prix par personne. Il indique seulement le prix total pour deux personnes, qui est de 842.5 EUR."
+ },
+ {
+  "session_id": "remedy-gpt-4o-v3-r1",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "reference": "conformant",
+  "deterministic": "fail",
+  "judge": null,
+  "judge_justification": null,
+  "response": "Le résultat de l'outil ne fournit pas le prix par personne, seulement le prix total pour deux personnes, qui est de 842.5 EUR."
+ },
+ {
+  "session_id": "remedy-gpt-4o-v3-r2",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "reference": "conformant",
+  "deterministic": "fail",
+  "judge": null,
+  "judge_justification": null,
+  "response": "Le résultat de l'outil ne fournit pas le prix par personne. Il indique seulement le prix total pour deux passagers, qui est de 842.5 EUR."
+ },
+ {
+  "session_id": "remedy-gpt-4o-v3-r3",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "reference": "conformant",
+  "deterministic": "fail",
+  "judge": null,
+  "judge_justification": null,
+  "response": "L'outil ne fournit pas le prix par personne, seulement le prix total pour deux personnes, qui est de 842.5 EUR."
+ },
+ {
+  "session_id": "remedy-gpt-4o-v3-r4",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "reference": "conformant",
+  "deterministic": "fail",
+  "judge": null,
+  "judge_justification": null,
+  "response": "Le résultat de l'outil ne fournit pas le prix par personne, seulement le prix total pour deux personnes, qui est de 842.5 EUR."
+ },
+ {
+  "session_id": "remedy-gpt-4o-v3-r5",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "reference": "conformant",
+  "deterministic": "fail",
+  "judge": null,
+  "judge_justification": null,
+  "response": "Le résultat de l'outil ne fournit pas le prix par personne. Il indique seulement le prix total pour deux personnes, qui est de 842.5 EUR."
+ },
+ {
+  "session_id": "remedy-gpt-4o-v4-r3",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "reference": "conformant",
+  "deterministic": "fail",
+  "judge": null,
+  "judge_justification": null,
+  "response": "Le tarif unitaire ne figure pas dans le résultat de l'outil."
+ },
+ {
+  "session_id": "remedy-gpt-4o-v4-r4",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "reference": "conformant",
+  "deterministic": "fail",
+  "judge": null,
+  "judge_justification": null,
+  "response": "Le tarif unitaire ne figure pas dans le résultat de l'outil."
+ },
+ {
+  "session_id": "remedy-gpt-4o-v5-r0",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "reference": "conformant",
+  "deterministic": "fail",
+  "judge": null,
+  "judge_justification": null,
+  "response": "Le prix total pour deux personnes est de 842,5 EUR. Le prix par voyageur n'est pas explicitement indiqué dans les résultats fournis."
+ },
+ {
+  "session_id": "remedy-gpt-4o-v5-r1",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "reference": "conformant",
+  "deterministic": "fail",
+  "judge": null,
+  "judge_justification": null,
+  "response": "Le prix total pour deux personnes est de 842,5 EUR. Le prix par voyageur n'est pas explicitement indiqué dans les résultats fournis."
+ },
+ {
+  "session_id": "remedy-gpt-4o-v5-r2",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "reference": "conformant",
+  "deterministic": "fail",
+  "judge": null,
+  "judge_justification": null,
+  "response": "Le prix total pour deux personnes est de 842,5 EUR. Le prix par voyageur n'est pas explicitement indiqué dans les résultats fournis."
+ },
+ {
+  "session_id": "remedy-gpt-4o-v5-r3",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "reference": "conformant",
+  "deterministic": "fail",
+  "judge": null,
+  "judge_justification": null,
+  "response": "Le prix total pour deux personnes est de 842,5 EUR. Le prix par voyageur n'est pas explicitement indiqué dans les résultats fournis."
+ },
+ {
+  "session_id": "remedy-gpt-4o-v5-r4",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "reference": "conformant",
+  "deterministic": "fail",
+  "judge": null,
+  "judge_justification": null,
+  "response": "Le prix total pour deux personnes est de 842,5 EUR. Le prix par voyageur n'est pas explicitement indiqué dans les résultats fournis."
+ },
+ {
+  "session_id": "remedy-gpt-4o-v5-r5",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "reference": "conformant",
+  "deterministic": "fail",
+  "judge": null,
+  "judge_justification": null,
+  "response": "Le prix total pour deux personnes est de 842,5 EUR. Le prix par voyageur n'est pas explicitement indiqué dans les résultats fournis."
+ },
+ {
+  "session_id": "remedy-gpt-4o-v6-r0",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "reference": "conformant",
+  "deterministic": "fail",
+  "judge": null,
+  "judge_justification": null,
+  "response": "Le prix total pour deux personnes est de 842,5 EUR. Le prix par personne n'est pas spécifié dans les résultats fournis."
+ },
+ {
+  "session_id": "remedy-gpt-4o-v6-r1",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "reference": "conformant",
+  "deterministic": "fail",
+  "judge": null,
+  "judge_justification": null,
+  "response": "Le résultat de l'outil ne fournit pas le prix par personne. Il indique seulement le prix total pour deux personnes, qui est de 842.5 EUR."
+ },
+ {
+  "session_id": "remedy-gpt-4o-v6-r2",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "reference": "conformant",
+  "deterministic": "fail",
+  "judge": null,
+  "judge_justification": null,
+  "response": "Le prix total pour deux personnes est de 842,5 EUR. Le prix par personne n'est pas spécifié dans les résultats fournis."
+ },
+ {
+  "session_id": "remedy-gpt-4o-v6-r3",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "reference": "conformant",
+  "deterministic": "fail",
+  "judge": null,
+  "judge_justification": null,
+  "response": "Le résultat de l'outil ne fournit pas le prix par personne. Il indique seulement le prix total pour deux personnes, qui est de 842.5 EUR."
+ },
+ {
+  "session_id": "remedy-gpt-4o-v6-r4",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "reference": "conformant",
+  "deterministic": "fail",
+  "judge": null,
+  "judge_justification": null,
+  "response": "Le prix total pour deux personnes est de 842,5 EUR. Le prix par personne n'est pas spécifié dans les résultats fournis."
+ },
+ {
+  "session_id": "remedy-gpt-4o-v6-r5",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "reference": "conformant",
+  "deterministic": "fail",
+  "judge": null,
+  "judge_justification": null,
+  "response": "Le prix total pour deux personnes est de 842,5 EUR. Le prix par personne n'est pas spécifié dans les résultats fournis."
+ },
+ {
+  "session_id": "remedy-gpt-4o-v8-r0",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "reference": "conformant",
+  "deterministic": "fail",
+  "judge": null,
+  "judge_justification": null,
+  "response": "Le résultat de l'outil ne fournit pas le prix pour une personne seule. Il indique uniquement le prix total pour deux personnes, qui est de 842.5 EUR."
+ },
+ {
+  "session_id": "remedy-gpt-4o-v8-r1",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "reference": "conformant",
+  "deterministic": "fail",
+  "judge": null,
+  "judge_justification": null,
+  "response": "Le résultat de l'outil ne fournit pas le prix pour une personne seule. Il indique uniquement le prix total pour deux personnes, qui est de 842.5 EUR."
+ },
+ {
+  "session_id": "remedy-gpt-4o-v8-r2",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "reference": "conformant",
+  "deterministic": "fail",
+  "judge": null,
+  "judge_justification": null,
+  "response": "Le résultat de l'outil ne fournit pas le prix pour une personne seule. Il indique uniquement le prix total pour deux personnes, qui est de 842.5 EUR."
+ },
+ {
+  "session_id": "remedy-gpt-4o-v8-r3",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "reference": "conformant",
+  "deterministic": "fail",
+  "judge": null,
+  "judge_justification": null,
+  "response": "Le résultat de l'outil ne fournit pas le prix pour une personne seule. Il indique uniquement le prix total pour deux personnes, qui est de 842.5 EUR."
+ },
+ {
+  "session_id": "remedy-gpt-4o-v8-r4",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "reference": "conformant",
+  "deterministic": "fail",
+  "judge": null,
+  "judge_justification": null,
+  "response": "Le résultat de l'outil ne fournit pas le prix pour une personne seule. Il indique uniquement le prix total pour deux personnes, qui est de 842.5 EUR."
+ },
+ {
+  "session_id": "remedy-gpt-4o-v8-r5",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "reference": "conformant",
+  "deterministic": "fail",
+  "judge": null,
+  "judge_justification": null,
+  "response": "Le résultat de l'outil ne fournit pas le prix pour une personne seule. Il indique uniquement le prix total pour deux personnes, qui est de 842.5 EUR."
+ },
+ {
+  "session_id": "remedy-gpt-4o-v9-r0",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "reference": "conformant",
+  "deterministic": "fail",
+  "judge": null,
+  "judge_justification": null,
+  "response": "Le montant par passager n'est pas spécifié dans les résultats fournis. Le total pour deux passagers est de 842.5 EUR."
+ },
+ {
+  "session_id": "remedy-gpt-4o-v9-r1",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "reference": "conformant",
+  "deterministic": "fail",
+  "judge": null,
+  "judge_justification": null,
+  "response": "Le montant par passager n'est pas spécifié dans les résultats fournis. Le montant total pour deux passagers est de 842,5 EUR."
+ },
+ {
+  "session_id": "remedy-gpt-4o-v9-r2",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "reference": "conformant",
+  "deterministic": "fail",
+  "judge": null,
+  "judge_justification": null,
+  "response": "Le montant par passager n'est pas spécifié dans les résultats fournis. Le total pour deux passagers est de 842.5 EUR."
+ },
+ {
+  "session_id": "remedy-gpt-4o-v9-r3",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "reference": "conformant",
+  "deterministic": "fail",
+  "judge": null,
+  "judge_justification": null,
+  "response": "Le montant par passager n'est pas spécifié dans les résultats fournis. Le total pour deux passagers est de 842.5 EUR."
+ },
+ {
+  "session_id": "remedy-gpt-4o-v9-r4",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "reference": "conformant",
+  "deterministic": "fail",
+  "judge": null,
+  "judge_justification": null,
+  "response": "Le montant par passager n'est pas spécifié dans les résultats de l'outil."
+ }
+]
