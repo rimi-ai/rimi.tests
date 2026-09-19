@@ -6,6 +6,8 @@ A test case is a self-contained YAML file: system prompt, tool schemas, **simula
 
 Without this, "testable" stays a promise.
 
+Which of the convention's 66 rules have test cases today, which can have them without a judge, and in what order the missing ones will be written: [COVERAGE.md](COVERAGE.md).
+
 > **Status: step T3.** The case format, `rimi lint` and the engine and the report are here: cases run against real models through LiteLLM, deterministic checks decide, verdicts come with a confidence interval, and every call is recorded in a chained log. `rimi verify` and the proof bundle arrive in the following steps — see [Roadmap](#roadmap). Commands that are not implemented say so and exit with code 2.
 
 ## Install
