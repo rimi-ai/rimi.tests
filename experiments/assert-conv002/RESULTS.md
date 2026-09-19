@@ -64,6 +64,8 @@ The case's subject is *prix par passager*. Every synonym — *par personne*, *ta
 
 **The published campaign figure is not affected.** The defect could only have inflated the failure count if some base-arm answer had declared the absence and been failed for its wording. None did: all 107 base answers either divide the total (93) or produce no text (14). The published *0 of 60 and 0 of 47 evaluable* stands. What the defect does touch is the conformant arm, whose true conformance is 94 of 187, not 49 of 206.
 
+> **Since corrected, for another reason.** This paragraph is right that no base-arm answer was failed for its wording. It is wrong to conclude the published figure stands: the 14 base answers with no text should never have been in the denominator either, and neither should the 5 in the other arm. The figure is now *0 of 54 and 0 of 39* — see [states-unknown-fix](../states-unknown-fix/RESULTS.md). The finding is unchanged; the count was wrong in our favour. Left in place rather than edited away, because a results file that quietly improves after the fact is worth nothing.
+
 **Second defect of ours, smaller.** Nineteen answers produced no text — sixteen of them because the model answered with a tool call. Our tester counted them as failures. They are not answers, and they belong with truncations, outside the denominator. Both defects are ours to fix.
 
 ## What could not be measured, and why
