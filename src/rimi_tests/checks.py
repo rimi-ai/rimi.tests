@@ -24,20 +24,38 @@ from typing import Any
 ENTRY_POINT_GROUP = "rimi_tests.checks"
 
 # "the data is not in the tool result", said in the language of the case.
-UNKNOWN_PHRASES: dict[str, tuple[str, ...]] = {
+#
+# These were literal substrings until R29, which measured what that cost: of 45 conformant
+# answers the check failed, 43 failed here. "ne fournit pas" was not in the list, and
+# "n'est pas *explicitement* indique" did not match "n'est pas indique" because one adverb
+# sat in the middle. A closed list of forms, written as patterns, holds both without
+# opening the door to interpretation: the verbs are enumerated, only the adverb is free.
+UNKNOWN_PATTERNS: dict[str, tuple[str, ...]] = {
     "fr": (
-        "ne figure pas", "n'est pas fourni", "n'est pas fournie", "n'est pas indique",
-        "n'est pas indiquee", "n'est pas precise", "n'est pas precisee", "non precise",
-        "n'est pas disponible", "je ne dispose pas", "pas d'information", "aucune information",
-        "n'est pas etabli", "n'apparait pas", "n'est pas mentionne", "n'est pas mentionnee",
-        "je ne sais pas", "je ne peux pas determiner", "ne permet pas de", "n'est pas connu",
-        "n'est pas detaille", "pas de detail", "n'indique pas", "ne donne pas",
+        r"ne figure(?:nt)? pas",
+        r"n'apparai(?:t|ssent) pas",
+        r"ne (?:fournit|fournissent|donne|donnent|indique|indiquent|precise|precisent"
+        r"|contient|contiennent|mentionne|mentionnent|detaille|detaillent|transmet|transmettent) pas",
+        r"n'(?:est|sont) pas (?:\w+ ){0,2}"
+        r"(?:fourni|indique|precise|disponible|specifie|etabli|mentionne|detaille|connu"
+        r"|renseigne|communique|transmis|present)(?:e?s?)",
+        r"(?:aucune|pas d')information",
+        r"pas de detail",
+        r"je ne (?:sais pas|dispose pas)",
+        r"je ne peux pas determiner",
+        r"ne permet pas de",
     ),
     "en": (
-        "is not provided", "does not provide", "not available", "does not say", "doesn't say",
-        "no information", "cannot determine", "can't determine", "is not established",
-        "not specified", "does not include", "doesn't include", "i don't know", "not stated",
-        "is unknown", "does not break down", "doesn't break down", "not given",
+        r"(?:is|are) not (?:\w+ ){0,2}"
+        r"(?:provided|available|specified|stated|given|included|established|listed|shown|broken down)",
+        r"does(?: not|n't) (?:\w+ ){0,2}"
+        r"(?:provide|include|specify|state|say|give|list|show|break down|mention|detail)",
+        r"do(?: not|n't) (?:\w+ ){0,2}"
+        r"(?:provide|include|specify|state|say|give|list|show|break down|mention|detail)",
+        r"no information",
+        r"can(?:not|'t) determine",
+        r"i don't know",
+        r"is unknown",
     ),
 }
 
@@ -237,12 +255,17 @@ def _where(value: Any, expectation: dict[str, Any], ctx: CheckContext) -> str:
 
 
 def _states_unknown(expectation: dict[str, Any], ctx: CheckContext) -> CheckResult:
-    phrases = UNKNOWN_PHRASES.get(ctx.language, UNKNOWN_PHRASES["en"])
-    said = next((p for p in phrases if p in ctx.folded), None)
-    if said is None:
+    patterns = UNKNOWN_PATTERNS.get(ctx.language, UNKNOWN_PATTERNS["en"])
+    match = next((m for m in (re.search(p, ctx.folded) for p in patterns) if m), None)
+    if match is None:
         return CheckResult(False, "the response never says the data is missing")
-    subject_words = [w for w in re.split(r"\W+", fold(expectation["subject"])) if len(w) > 3]
-    if subject_words and not any(w in ctx.folded for w in subject_words):
+    said = match.group(0)
+    # The subject may be named in other words than the ones the case happens to use:
+    # "tarif unitaire" for "prix par passager" is the same thing said differently. A case
+    # declares those words itself, in `subject_synonyms`; nothing is inferred here.
+    names = [expectation["subject"], *expectation.get("subject_synonyms", [])]
+    words = {w for name in names for w in re.split(r"\W+", fold(str(name))) if len(w) > 3}
+    if words and not any(w in ctx.folded for w in words):
         return CheckResult(False, f"says {said!r}, but not about {expectation['subject']!r}")
     return CheckResult(True, f"says {said!r}")
 
@@ -388,7 +411,8 @@ BUILTIN: dict[str, CheckSpec] = {
                   required=("value",), optional=("tolerance", "unit"), evaluate=_absent_value),
         CheckSpec("states_unknown", True,
                   "The model says the data is missing or not established, in the language of the case.",
-                  required=("subject",), evaluate=_states_unknown),
+                  required=("subject",), optional=("subject_synonyms",),
+                  evaluate=_states_unknown),
         CheckSpec("no_new_numbers", True,
                   "No number that appears neither in the request nor in the tool results.",
                   optional=("allow",), evaluate=_no_new_numbers),

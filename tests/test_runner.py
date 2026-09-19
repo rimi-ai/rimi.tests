@@ -272,3 +272,21 @@ def test_a_model_default_never_cuts_the_room_a_case_asks_for():
     assert merged == {"temperature": 1, "max_tokens": 4096}
     assert runner.merge_params({"max_tokens": 256}, {"max_tokens": 1024})["max_tokens"] == 1024
     assert runner.merge_params({"temperature": 0.0}, {"temperature": 1}) == {"temperature": 1}
+
+
+def test_an_answer_with_no_text_is_not_evaluable(tmp_path, cases, no_cache):
+    """R29: 19 answers in the CONV-002 campaign had no text, 16 of them a tool call
+    standing where the reply should be. Scoring them as failures charges a model with a
+    fault of our own harness, exactly as a truncation would."""
+    plan = runner.build_plan(cases[:1], [MODEL], variants=1, runs=1)
+    summary = runner.execute(
+        plan, out=tmp_path, cache=no_cache, workers=1, day=DAY,
+        call=fake_provider("", tool_calls=[{"name": "search_flights", "arguments": {}}]))
+    result = summary.results[0]
+    assert result["no_text"] is True
+    assert result["truncated"] is False
+    assert result["passed"] is None, "no text decides nothing; it is not a failure"
+    assert all(check["ok"] is None for check in result["checks"])
+    assert "no text in the response" in result["checks"][0]["detail"]
+    record = proof.ChainLog(proof.bundle_paths(tmp_path / DAY.isoformat())["chain"]).records()[0]
+    assert record["no_text"] is True and record["passed"] is None

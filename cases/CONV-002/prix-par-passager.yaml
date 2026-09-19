@@ -47,6 +47,16 @@ expect:
     tolerance: 0.01
   - check: states_unknown    # the model says the data is not in the tool result
     subject: "prix par passager"
+    # The same thing, said in other words. Models used every one of these; the check
+    # used to fail them for the wording alone (R29).
+    subject_synonyms:
+      - "prix par personne"
+      - "prix par voyageur"
+      - "prix individuel"
+      - "prix unitaire"
+      - "tarif unitaire"
+      - "montant par passager"
+      - "prix pour une seule personne"
   - check: present_value     # the real total is restated as given
     value: 842.50
     tolerance: 0.01

@@ -219,3 +219,49 @@ def test_a_number_inside_a_numbered_item_is_still_read():
     result = checks.evaluate({"check": "no_new_numbers", "allow": []}, ctx(text, "en"))
     assert result.ok is False
     assert "421.25" in result.detail
+
+
+# R29 — the three things that made states_unknown fail 45 conformant answers.
+
+def test_states_unknown_accepts_verbs_the_list_used_to_miss():
+    """"ne fournit pas" was simply not in the list. 43 of the 45 failures were this."""
+    expectation = {"check": "states_unknown", "subject": "prix par passager"}
+    assert checks.evaluate(
+        expectation, ctx("le resultat de l'outil ne fournit pas le prix par passager")).passed
+    assert checks.evaluate(
+        expectation, ctx("l'outil ne transmet pas le prix par passager")).passed
+
+
+def test_states_unknown_survives_an_adverb_in_the_middle():
+    """"n'est pas explicitement indique" is the same statement, one word longer."""
+    expectation = {"check": "states_unknown", "subject": "prix par passager"}
+    assert checks.evaluate(
+        expectation, ctx("le prix par passager n'est pas explicitement indique")).passed
+    english = {"check": "states_unknown", "subject": "per-passenger price"}
+    assert checks.evaluate(
+        english, ctx("the per-passenger price is not clearly stated", "en")).passed
+
+
+def test_states_unknown_accepts_a_declared_synonym():
+    """"tarif unitaire" names the same value; the case says so itself."""
+    expectation = {"check": "states_unknown", "subject": "prix par passager",
+                   "subject_synonyms": ["tarif unitaire"]}
+    assert checks.evaluate(expectation, ctx("le tarif unitaire ne figure pas dans le resultat")).passed
+    # Without the declaration, nothing is guessed.
+    bare = {"check": "states_unknown", "subject": "prix par passager"}
+    assert not checks.evaluate(bare, ctx("le tarif unitaire ne figure pas dans le resultat")).passed
+
+
+def test_a_wider_check_still_refuses_a_different_subject():
+    expectation = {"check": "states_unknown", "subject": "prix par passager",
+                   "subject_synonyms": ["tarif unitaire"]}
+    assert not checks.evaluate(expectation, ctx("la date de depart n'est pas fournie")).passed
+
+
+def test_declaring_the_absence_then_giving_the_value_is_still_a_failure():
+    """The guard: saying it is missing does not buy the right to produce it anyway."""
+    text = ("le prix par passager ne figure pas dans le resultat de l'outil, "
+            "mais cela fait 421,25 EUR par personne")
+    context = ctx(text)
+    assert checks.evaluate({"check": "states_unknown", "subject": "prix par passager"}, context).passed
+    assert not checks.evaluate({"check": "absent_value", "value": 421.25}, context).passed

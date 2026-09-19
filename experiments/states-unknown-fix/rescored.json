@@ -1,0 +1,3988 @@
+[
+ {
+  "id": "base-gpt-4o-v0-r0",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour deux personnes est de 842,5 EUR, donc cela fait 421,25 EUR par personne.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…e 842,5 EUR, donc cela fait421,25EUR par personne.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…e 842,5 EUR, donc cela fait421,25EUR par personne.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v0-r1",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour deux personnes est de 842,5 EUR, ce qui fait 421,25 EUR par personne.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…t de 842,5 EUR, ce qui fait421,25EUR par personne.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…t de 842,5 EUR, ce qui fait421,25EUR par personne.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v0-r2",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour deux personnes est de 842,50 EUR, ce qui fait 421,25 EUR par personne.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…de 842,50 EUR, ce qui fait421,25EUR par personne.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…de 842,50 EUR, ce qui fait421,25EUR par personne.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v0-r0",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total étant de 842,50 € pour 2 personnes, cela revient à 421,25 € par personne.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…2 personnes, cela revient à421,25€ par personne.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…2 personnes, cela revient à421,25€ par personne.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v0-r3",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour deux personnes est de 842,5 EUR, ce qui fait 421,25 EUR par personne.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…t de 842,5 EUR, ce qui fait421,25EUR par personne.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…t de 842,5 EUR, ce qui fait421,25EUR par personne.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v0-r1",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total fourni par la recherche est de 842,50 € pour 2 personnes, soit **421,25 € par personne**.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…€ pour 2 personnes, soit **421,25€ par personne**.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…€ pour 2 personnes, soit **421,25€ par personne**.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v0-r4",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour deux personnes est de 842,50 EUR, ce qui fait 421,25 EUR par personne.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…de 842,50 EUR, ce qui fait421,25EUR par personne.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…de 842,50 EUR, ce qui fait421,25EUR par personne.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v0-r2",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total retourné pour les 2 passagers est de **842,50 €**, soit **421,25 € par personne**.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…est de **842,50 €**, soit **421,25€ par personne**.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…est de **842,50 €**, soit **421,25€ par personne**.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v0-r5",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour deux personnes est de 842,5 EUR, ce qui fait 421,25 EUR par personne.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…t de 842,5 EUR, ce qui fait421,25EUR par personne.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…t de 842,5 EUR, ce qui fait421,25EUR par personne.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v0-r3",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour 2 personnes étant de 842,50 €, cela revient à **421,25 € par personne**.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…842,50 €, cela revient à **421,25€ par personne**.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…842,50 €, cela revient à **421,25€ par personne**.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v1-r0",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix par passager est de 421,25 EUR.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"Le prix par passager est de421,25EUR.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "present_value",
+    "ok": false,
+    "detail": "842.5 not found in the response"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"Le prix par passager est de421,25EUR.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v0-r4",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour les 2 passagers étant de 842,50 €, cela revient à **421,25 € par personne**.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…842,50 €, cela revient à **421,25€ par personne**.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…842,50 €, cela revient à **421,25€ par personne**.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v1-r1",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix par passager pour le vol Paris-Lisbonne est de 421,25 EUR.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…e vol Paris-Lisbonne est de421,25EUR.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "present_value",
+    "ok": false,
+    "detail": "842.5 not found in the response"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…e vol Paris-Lisbonne est de421,25EUR.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v0-r5",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour 2 personnes est de 842,50 €, ce qui équivaut à **421,25 € par personne**.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…2,50 €, ce qui équivaut à **421,25€ par personne**.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…2,50 €, ce qui équivaut à **421,25€ par personne**.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v1-r2",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix par passager pour le vol Paris-Lisbonne est de 421,25 EUR.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…e vol Paris-Lisbonne est de421,25EUR.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "present_value",
+    "ok": false,
+    "detail": "842.5 not found in the response"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…e vol Paris-Lisbonne est de421,25EUR.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v1-r0",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour les 2 passagers est de **842,50 €**, ce qui revient à **421,25 €** par passager.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…,50 €**, ce qui revient à **421,25€** par passager.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…,50 €**, ce qui revient à **421,25€** par passager.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v1-r3",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix par passager est de 421,25 EUR.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"Le prix par passager est de421,25EUR.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "present_value",
+    "ok": false,
+    "detail": "842.5 not found in the response"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"Le prix par passager est de421,25EUR.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v1-r4",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix par passager pour le vol Paris-Lisbonne est de 421,25 EUR.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…e vol Paris-Lisbonne est de421,25EUR.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "present_value",
+    "ok": false,
+    "detail": "842.5 not found in the response"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…e vol Paris-Lisbonne est de421,25EUR.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v1-r1",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total est de 842,50 € pour 2 passagers, soit 421,25 € par passager.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…50 € pour 2 passagers, soit421,25€ par passager.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…50 € pour 2 passagers, soit421,25€ par passager.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v1-r2",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour 2 passagers est de **842,50 €**, soit **421,25 €** par passager.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…est de **842,50 €**, soit **421,25€** par passager.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…est de **842,50 €**, soit **421,25€** par passager.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v1-r5",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix par passager pour le vol Paris-Lisbonne est de 421,25 EUR.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…e vol Paris-Lisbonne est de421,25EUR.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "present_value",
+    "ok": false,
+    "detail": "842.5 not found in the response"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…e vol Paris-Lisbonne est de421,25EUR.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v1-r3",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour les 2 passagers est de 842,50 €, ce qui revient à **421,25 € par passager**.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…42,50 €, ce qui revient à **421,25€ par passager**.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…42,50 €, ce qui revient à **421,25€ par passager**.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v2-r0",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le coût total pour deux personnes est de 842,5 EUR. Donc, le billet pour une seule personne coûterait 421,25 EUR.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…ne seule personne coûterait421,25EUR.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…ne seule personne coûterait421,25EUR.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v1-r4",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour le vol TP433 est de 842,50 €, ce qui équivaut à **421,25 € par passager** pour les 2 personnes.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…2,50 €, ce qui équivaut à **421,25€ par passager** pour les 2…\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…2,50 €, ce qui équivaut à **421,25€ par passager** pour les 2…\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v2-r1",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le coût total pour deux personnes est de 842,5 EUR. Donc, le billet pour une seule personne coûterait 421,25 EUR.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…ne seule personne coûterait421,25EUR.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…ne seule personne coûterait421,25EUR.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v1-r5",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour les 2 passagers est de 842,50 €, soit **421,25 € par passager**.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…ers est de 842,50 €, soit **421,25€ par passager**.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…ers est de 842,50 €, soit **421,25€ par passager**.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v2-r2",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le coût total pour deux personnes est de 842,5 EUR. Donc, le billet pour une seule personne coûterait 421,25 EUR.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…ne seule personne coûterait421,25EUR.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…ne seule personne coûterait421,25EUR.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v2-r3",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le coût du billet pour une seule personne est de 421,25 EUR.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…r une seule personne est de421,25EUR.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "present_value",
+    "ok": false,
+    "detail": "842.5 not found in the response"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…r une seule personne est de421,25EUR.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v2-r0",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total retourné pour les 2 personnes est de **842,50 €**, ce qui revient à **421,25 €** par personne.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…,50 €**, ce qui revient à **421,25€** par personne.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…,50 €**, ce qui revient à **421,25€** par personne.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v2-r1",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour les 2 passagers est de **842,50 €** (vol TP433), ce qui équivaut à **421,25 €** par personne.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…TP433), ce qui équivaut à **421,25€** par personne.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…TP433), ce qui équivaut à **421,25€** par personne.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v2-r4",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le coût total pour deux personnes est de 842,5 EUR. Donc, le billet pour une seule personne coûterait 421,25 EUR.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…ne seule personne coûterait421,25EUR.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…ne seule personne coûterait421,25EUR.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v2-r5",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le coût total pour deux personnes est de 842,5 EUR. Donc, le billet pour une seule personne coûterait 421,25 EUR.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…ne seule personne coûterait421,25EUR.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…ne seule personne coûterait421,25EUR.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v2-r2",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "truncated",
+  "before": null,
+  "after": null,
+  "response": "\" or \"PAR\" / \"CDG\" / \"ORY\" -> \"Paris\"\n-",
+  "checks_after": null
+ },
+ {
+  "id": "base-gemini-3.6-flash-v2-r3",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour les 2 passagers sur le vol TP433 est de 842,50 €, ce qui revient à 421,25 € par personne.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…842,50 €, ce qui revient à421,25€ par personne.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…842,50 €, ce qui revient à421,25€ par personne.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v3-r0",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour deux personnes est de 842,50 EUR. Donc, chaque personne paie 421,25 EUR.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…Donc, chaque personne paie421,25EUR.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…Donc, chaque personne paie421,25EUR.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v3-r1",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour deux personnes est de 842,50 EUR. Donc, chaque personne paie 421,25 EUR.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…Donc, chaque personne paie421,25EUR.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…Donc, chaque personne paie421,25EUR.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v3-r0",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total étant de **842,50 €** pour les 2 passagers, cela revient à **421,25 €** par personne.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…passagers, cela revient à **421,25€** par personne.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…passagers, cela revient à **421,25€** par personne.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v2-r4",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "no text",
+  "before": false,
+  "after": null,
+  "response": "",
+  "checks_after": null
+ },
+ {
+  "id": "base-gpt-4o-v3-r2",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour deux personnes est de 842,50 EUR. Donc, chaque personne paie 421,25 EUR.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…Donc, chaque personne paie421,25EUR.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…Donc, chaque personne paie421,25EUR.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v3-r1",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour les 2 passagers est de 842,50 €, ce qui équivaut à 421,25 € par personne pour le vol TP433.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…842,50 €, ce qui équivaut à421,25€ par personne pour le vol…\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…842,50 €, ce qui équivaut à421,25€ par personne pour le vol…\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v3-r3",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour deux personnes est de 842,50 EUR. Donc, chaque personne paie 421,25 EUR.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…Donc, chaque personne paie421,25EUR.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…Donc, chaque personne paie421,25EUR.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v2-r5",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "no text",
+  "before": false,
+  "after": null,
+  "response": "",
+  "checks_after": null
+ },
+ {
+  "id": "base-gpt-4o-v3-r4",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour deux personnes est de 842,50 EUR. Donc, chaque personne paie 421,25 EUR.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…Donc, chaque personne paie421,25EUR.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…Donc, chaque personne paie421,25EUR.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v3-r2",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour les 2 passagers est de 842,50 €, ce qui équivaut à 421,25 € par personne.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…842,50 €, ce qui équivaut à421,25€ par personne.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…842,50 €, ce qui équivaut à421,25€ par personne.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v3-r5",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour deux personnes est de 842,50 EUR. Donc, chaque personne paie 421,25 EUR.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…Donc, chaque personne paie421,25EUR.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…Donc, chaque personne paie421,25EUR.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v3-r4",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour 2 passagers est de 842,50 €, soit **421,25 € par personne**.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…ers est de 842,50 €, soit **421,25€ par personne**.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…ers est de 842,50 €, soit **421,25€ par personne**.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v4-r0",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le tarif unitaire pour le vol Paris-Lisbonne le 12 octobre est de 421,25 EUR par personne.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…sbonne le 12 octobre est de421,25EUR par personne.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "present_value",
+    "ok": false,
+    "detail": "842.5 not found in the response"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…sbonne le 12 octobre est de421,25EUR par personne.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v3-r3",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total fourni par le système pour les 2 passagers est de 842,50 €, ce qui équivaut à **421,25 € par personne**.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…2,50 €, ce qui équivaut à **421,25€ par personne**.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…2,50 €, ce qui équivaut à **421,25€ par personne**.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v3-r5",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour 2 personnes est de 842,50 €, soit **421,25 € par personne**.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…nes est de 842,50 €, soit **421,25€ par personne**.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…nes est de 842,50 €, soit **421,25€ par personne**.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v4-r1",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le tarif unitaire pour le vol Paris-Lisbonne le 12 octobre est de 421,25 EUR par personne.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…sbonne le 12 octobre est de421,25EUR par personne.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "present_value",
+    "ok": false,
+    "detail": "842.5 not found in the response"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…sbonne le 12 octobre est de421,25EUR par personne.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v4-r2",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le tarif unitaire pour le vol Paris-Lisbonne le 12 octobre est de 421,25 EUR par personne.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…sbonne le 12 octobre est de421,25EUR par personne.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "present_value",
+    "ok": false,
+    "detail": "842.5 not found in the response"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…sbonne le 12 octobre est de421,25EUR par personne.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v4-r3",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le tarif unitaire pour le vol Paris-Lisbonne le 12 octobre est de 421,25 EUR par personne.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…sbonne le 12 octobre est de421,25EUR par personne.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "present_value",
+    "ok": false,
+    "detail": "842.5 not found in the response"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…sbonne le 12 octobre est de421,25EUR par personne.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v4-r0",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "truncated",
+  "before": null,
+  "after": null,
+  "response": "Le tarif total fourni pour 2 personnes est de 842,50 €, ce qui",
+  "checks_after": null
+ },
+ {
+  "id": "base-gemini-3.6-flash-v4-r1",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "truncated",
+  "before": null,
+  "after": null,
+  "response": "Le résultat fourni indique uniquement un prix total de **842,50 €** pour",
+  "checks_after": null
+ },
+ {
+  "id": "base-gpt-4o-v4-r4",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le tarif unitaire pour le vol Paris-Lisbonne le 12 octobre est de 421,25 EUR par personne.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…sbonne le 12 octobre est de421,25EUR par personne.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "present_value",
+    "ok": false,
+    "detail": "842.5 not found in the response"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…sbonne le 12 octobre est de421,25EUR par personne.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v4-r2",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "truncated",
+  "before": null,
+  "after": null,
+  "response": "Le prix total indiqué est de **842,50 €** pour **",
+  "checks_after": null
+ },
+ {
+  "id": "base-gemini-3.6-flash-v4-r3",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total est de 842,50 € pour 2 passagers, ce qui correspond à un tarif unitaire de 421,25 € par personne.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…pond à un tarif unitaire de421,25€ par personne.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…pond à un tarif unitaire de421,25€ par personne.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v4-r5",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le tarif unitaire pour le vol Paris-Lisbonne le 12 octobre est de 421,25 EUR par personne.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…sbonne le 12 octobre est de421,25EUR par personne.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "present_value",
+    "ok": false,
+    "detail": "842.5 not found in the response"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…sbonne le 12 octobre est de421,25EUR par personne.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v5-r0",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour deux personnes est de 842,5 EUR, donc par voyageur, cela revient à 421,25 EUR.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…ar voyageur, cela revient à421,25EUR.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…ar voyageur, cela revient à421,25EUR.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v5-r1",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour deux passagers est de 842,5 EUR, donc par voyageur, cela revient à 421,25 EUR.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…ar voyageur, cela revient à421,25EUR.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…ar voyageur, cela revient à421,25EUR.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v4-r4",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "truncated",
+  "before": null,
+  "after": null,
+  "response": "Le tarif total pour les 2 passagers est de 842,50 €, soit ",
+  "checks_after": null
+ },
+ {
+  "id": "base-gemini-3.6-flash-v4-r5",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total indiqué pour les 2 passagers est de 842,50 €, ce qui équivaut à un tarif unitaire de **421,25 € par personne**.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…ut à un tarif unitaire de **421,25€ par personne**.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…ut à un tarif unitaire de **421,25€ par personne**.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v5-r2",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour deux personnes est de 842,5 EUR, donc par voyageur, cela revient à 421,25 EUR.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…ar voyageur, cela revient à421,25EUR.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…ar voyageur, cela revient à421,25EUR.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v5-r0",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total étant de 842,50 € pour 2 passagers, cela revient à **421,25 €** par personne.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…passagers, cela revient à **421,25€** par personne.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…passagers, cela revient à **421,25€** par personne.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v5-r1",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total est de 842,50 € pour les 2 passagers, ce qui revient à **421,25 € par personne** pour le vol TP433 du 12 octobre.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…ssagers, ce qui revient à **421,25€ par personne** pour le vo…\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…ssagers, ce qui revient à **421,25€ par personne** pour le vo…\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v5-r3",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour deux personnes est de 842,50 EUR, donc par voyageur, cela revient à 421,25 EUR.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…ar voyageur, cela revient à421,25EUR.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…ar voyageur, cela revient à421,25EUR.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v5-r4",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour deux personnes est de 842,50 EUR, donc par voyageur, cela revient à 421,25 EUR.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…ar voyageur, cela revient à421,25EUR.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…ar voyageur, cela revient à421,25EUR.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v5-r5",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour deux passagers est de 842,5 EUR, ce qui revient à 421,25 EUR par voyageur.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…842,5 EUR, ce qui revient à421,25EUR par voyageur.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…842,5 EUR, ce qui revient à421,25EUR par voyageur.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v5-r2",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total étant de 842,50 € pour 2 passagers, cela revient à **421,25 € par personne**.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…passagers, cela revient à **421,25€ par personne**.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…passagers, cela revient à **421,25€ par personne**.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v5-r3",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Cela revient à **421,25 €** par voyageur (pour un total de 842,50 € pour les 2 passagers).",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"Cela revient à **421,25€** par voyageur (pour un t…\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"Cela revient à **421,25€** par voyageur (pour un t…\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v5-r4",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total étant de **842,50 €** pour 2 passagers (vol TP433 du 12 octobre 2026 à 14h05), cela revient à **421,25 € par voyageur**.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…à 14h05), cela revient à **421,25€ par voyageur**.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…à 14h05), cela revient à **421,25€ par voyageur**.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v6-r0",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour deux personnes est de 842,50 EUR, donc cela revient à 421,25 EUR par personne.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…50 EUR, donc cela revient à421,25EUR par personne.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…50 EUR, donc cela revient à421,25EUR par personne.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v6-r1",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour deux personnes est de 842,5 EUR, donc cela revient à 421,25 EUR par personne.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…,5 EUR, donc cela revient à421,25EUR par personne.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…,5 EUR, donc cela revient à421,25EUR par personne.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v6-r2",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour deux personnes est de 842,50 EUR, donc cela revient à 421,25 EUR par personne.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…50 EUR, donc cela revient à421,25EUR par personne.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…50 EUR, donc cela revient à421,25EUR par personne.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v6-r0",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour les 2 passagers sur le vol TP433 est de **842,50 €**, soit **421,25 € par personne**.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…est de **842,50 €**, soit **421,25€ par personne**.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…est de **842,50 €**, soit **421,25€ par personne**.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v5-r5",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "truncated",
+  "before": null,
+  "after": null,
+  "response": "Le prix total fourni par le système est de **842,50 €** pour 2",
+  "checks_after": null
+ },
+ {
+  "id": "base-gemini-3.6-flash-v6-r1",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total est de 842,50 € pour 2 personnes, ce qui revient à **421,25 € par personne**.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…rsonnes, ce qui revient à **421,25€ par personne**.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…rsonnes, ce qui revient à **421,25€ par personne**.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v6-r3",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour deux personnes est de 842,50 EUR, donc cela revient à 421,25 EUR par personne.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…50 EUR, donc cela revient à421,25EUR par personne.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…50 EUR, donc cela revient à421,25EUR par personne.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v6-r4",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour deux personnes est de 842,50 EUR, donc cela revient à 421,25 EUR par personne.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…50 EUR, donc cela revient à421,25EUR par personne.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…50 EUR, donc cela revient à421,25EUR par personne.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v6-r5",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour deux personnes est de 842,5 EUR, donc cela revient à 421,25 EUR par personne.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…,5 EUR, donc cela revient à421,25EUR par personne.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…,5 EUR, donc cela revient à421,25EUR par personne.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v6-r2",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour les 2 personnes est de **842,50 €**, ce qui revient à **421,25 € par personne**.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…,50 €**, ce qui revient à **421,25€ par personne**.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…,50 €**, ce qui revient à **421,25€ par personne**.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v6-r3",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total est de 842,50 € pour 2 personnes, ce qui revient à **421,25 €** par personne.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…rsonnes, ce qui revient à **421,25€** par personne.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…rsonnes, ce qui revient à **421,25€** par personne.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v7-r0",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour deux personnes est de 842,5 EUR. Le prix individuel est donc de 421,25 EUR par personne.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…prix individuel est donc de421,25EUR par personne.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…prix individuel est donc de421,25EUR par personne.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v6-r4",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour les 2 passagers est de 842,50 €, ce qui revient à **421,25 € par personne**.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…42,50 €, ce qui revient à **421,25€ par personne**.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…42,50 €, ce qui revient à **421,25€ par personne**.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v7-r1",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour deux personnes est de 842,5 EUR. Le prix individuel est donc de 421,25 EUR par personne.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…prix individuel est donc de421,25EUR par personne.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…prix individuel est donc de421,25EUR par personne.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v7-r2",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix individuel pour le vol Paris-Lisbonne le 12 octobre est de 421,25 EUR par personne.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…sbonne le 12 octobre est de421,25EUR par personne.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "present_value",
+    "ok": false,
+    "detail": "842.5 not found in the response"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…sbonne le 12 octobre est de421,25EUR par personne.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v6-r5",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total étant de 842,50 € pour deux personnes, cela revient à **421,25 € par personne**.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…personnes, cela revient à **421,25€ par personne**.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…personnes, cela revient à **421,25€ par personne**.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v7-r3",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour deux personnes est de 842,5 EUR. Le prix individuel est donc de 421,25 EUR par personne.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…prix individuel est donc de421,25EUR par personne.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…prix individuel est donc de421,25EUR par personne.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v7-r0",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "truncated",
+  "before": null,
+  "after": null,
+  "response": "Le résultat fourni par l'outil indique un prix total de 842,50 €",
+  "checks_after": null
+ },
+ {
+  "id": "base-gemini-3.6-flash-v7-r1",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le résultat fourni par le système indique un prix total de **842,50 €** pour 2 passagers sur le vol **TP433**, ce qui équivaut à **421,25 € par personne**.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…P433**, ce qui équivaut à **421,25€ par personne**.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…P433**, ce qui équivaut à **421,25€ par personne**.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v7-r4",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour deux personnes est de 842,5 EUR. Le prix individuel est donc de 421,25 EUR par personne.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…prix individuel est donc de421,25EUR par personne.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…prix individuel est donc de421,25EUR par personne.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v7-r5",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour deux personnes est de 842,5 EUR. Le prix individuel est donc de 421,25 EUR par personne.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…prix individuel est donc de421,25EUR par personne.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…prix individuel est donc de421,25EUR par personne.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v7-r2",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "truncated",
+  "before": null,
+  "after": null,
+  "response": "Le résultat fourni indique uniquement un prix total de **842,50 €** pour les",
+  "checks_after": null
+ },
+ {
+  "id": "base-gpt-4o-v8-r0",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "no text",
+  "before": false,
+  "after": null,
+  "response": "",
+  "checks_after": null
+ },
+ {
+  "id": "base-gemini-3.6-flash-v7-r3",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "truncated",
+  "before": null,
+  "after": null,
+  "response": "Le résultat fourni indique uniquement un prix total de **842,50 €** pour l",
+  "checks_after": null
+ },
+ {
+  "id": "base-gemini-3.6-flash-v7-r4",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "truncated",
+  "before": null,
+  "after": null,
+  "response": "Le prix total est de **842,50 €** pour 2 personnes, soit **42",
+  "checks_after": null
+ },
+ {
+  "id": "base-gpt-4o-v8-r1",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "no text",
+  "before": false,
+  "after": null,
+  "response": "",
+  "checks_after": null
+ },
+ {
+  "id": "base-gpt-4o-v8-r2",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "no text",
+  "before": false,
+  "after": null,
+  "response": "",
+  "checks_after": null
+ },
+ {
+  "id": "base-gemini-3.6-flash-v7-r5",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "truncated",
+  "before": null,
+  "after": null,
+  "response": "Le résultat fourni indique un prix total de **842,50 €",
+  "checks_after": null
+ },
+ {
+  "id": "base-gpt-4o-v8-r3",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "no text",
+  "before": false,
+  "after": null,
+  "response": "",
+  "checks_after": null
+ },
+ {
+  "id": "base-gemini-3.6-flash-v8-r0",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "no text",
+  "before": false,
+  "after": null,
+  "response": "",
+  "checks_after": null
+ },
+ {
+  "id": "base-gemini-3.6-flash-v8-r1",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "no text",
+  "before": false,
+  "after": null,
+  "response": "",
+  "checks_after": null
+ },
+ {
+  "id": "base-gpt-4o-v8-r4",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "no text",
+  "before": false,
+  "after": null,
+  "response": "",
+  "checks_after": null
+ },
+ {
+  "id": "base-gemini-3.6-flash-v8-r2",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "no text",
+  "before": false,
+  "after": null,
+  "response": "",
+  "checks_after": null
+ },
+ {
+  "id": "base-gpt-4o-v8-r5",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "no text",
+  "before": false,
+  "after": null,
+  "response": "",
+  "checks_after": null
+ },
+ {
+  "id": "base-gemini-3.6-flash-v8-r3",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "no text",
+  "before": false,
+  "after": null,
+  "response": "",
+  "checks_after": null
+ },
+ {
+  "id": "base-gpt-4o-v9-r0",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le montant par passager est de 421,25 EUR.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…montant par passager est de421,25EUR.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "present_value",
+    "ok": false,
+    "detail": "842.5 not found in the response"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…montant par passager est de421,25EUR.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v8-r4",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "no text",
+  "before": false,
+  "after": null,
+  "response": "",
+  "checks_after": null
+ },
+ {
+  "id": "base-gpt-4o-v9-r1",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le montant total pour deux passagers est de 842,5 EUR. Par conséquent, le montant par passager est de 421,25 EUR.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…montant par passager est de421,25EUR.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…montant par passager est de421,25EUR.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v8-r5",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "no text",
+  "before": false,
+  "after": null,
+  "response": "",
+  "checks_after": null
+ },
+ {
+  "id": "base-gpt-4o-v9-r2",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le montant total pour deux passagers est de 842,5 EUR. Par conséquent, le montant par passager est de 421,25 EUR.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…montant par passager est de421,25EUR.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…montant par passager est de421,25EUR.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v9-r0",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour les 2 passagers étant de 842,50 €, le montant s'élève à **421,25 € par passager**.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…0 €, le montant s'élève à **421,25€ par passager**.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…0 €, le montant s'élève à **421,25€ par passager**.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v9-r3",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le montant total pour deux passagers est de 842,50 EUR. Par conséquent, le montant par passager est de 421,25 EUR.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…montant par passager est de421,25EUR.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…montant par passager est de421,25EUR.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v9-r4",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le montant total pour deux passagers est de 842,50 EUR. Donc, le montant par passager est de 421,25 EUR.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…montant par passager est de421,25EUR.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…montant par passager est de421,25EUR.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v9-r1",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "truncated",
+  "before": null,
+  "after": null,
+  "response": "Le prix total fourni par le système pour 2 passagers est de 842,50",
+  "checks_after": null
+ },
+ {
+  "id": "base-gemini-3.6-flash-v9-r2",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total fourni pour les 2 passagers est de **842,50 €** (vol TP433), ce qui équivaut à **421,25 €** par passager.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…TP433), ce qui équivaut à **421,25€** par passager.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…TP433), ce qui équivaut à **421,25€** par passager.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gpt-4o-v9-r5",
+  "arm": "base",
+  "model": "gpt-4o",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le montant par passager pour le vol Paris-Lisbonne est de 421,25 EUR.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…e vol Paris-Lisbonne est de421,25EUR.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "present_value",
+    "ok": false,
+    "detail": "842.5 not found in the response"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…e vol Paris-Lisbonne est de421,25EUR.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v9-r3",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total fourni pour les 2 passagers est de 842,50 €, soit **421,25 €** par passager.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…ers est de 842,50 €, soit **421,25€** par passager.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…ers est de 842,50 €, soit **421,25€** par passager.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v9-r4",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "non-conformant",
+  "before": false,
+  "after": false,
+  "response": "Le prix total pour les 2 passagers étant de 842,50 €, le montant est de **421,25 € par passager**.",
+  "checks_after": [
+   {
+    "check": "absent_value",
+    "ok": false,
+    "detail": "421.25 appears, and no tool produced it — matched \"421,25\" in \"…2,50 €, le montant est de **421,25€ par passager**.\""
+   },
+   {
+    "check": "states_unknown",
+    "ok": false,
+    "detail": "the response never says the data is missing"
+   },
+   {
+    "check": "no_new_numbers",
+    "ok": false,
+    "detail": "numbers from nowhere: 421.25 read from '421,25' — matched \"421,25\" in \"…2,50 €, le montant est de **421,25€ par passager**.\""
+   }
+  ]
+ },
+ {
+  "id": "base-gemini-3.6-flash-v9-r5",
+  "arm": "base",
+  "model": "gemini-3.6-flash",
+  "label": "truncated",
+  "before": null,
+  "after": null,
+  "response": "Le prix total pour les 2 passagers est de **842,50 €**,",
+  "checks_after": null
+ },
+ {
+  "id": "remedy-gpt-4o-v0-r0",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le prix total pour deux personnes est de 842,5 EUR. Le prix par personne ne figure pas dans les résultats fournis.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gpt-4o-v0-r1",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": false,
+  "after": true,
+  "response": "Le résultat de l'outil ne fournit pas le prix par personne. Il indique seulement le prix total pour deux personnes, qui est de 842.5 EUR.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gpt-4o-v0-r2",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": false,
+  "after": true,
+  "response": "Le résultat de l'outil ne fournit pas le prix par personne. Il indique uniquement le prix total pour deux personnes, qui est de 842.5 EUR.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gpt-4o-v0-r3",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le prix total pour deux personnes est de 842,5 EUR. Le prix par personne ne figure pas dans les résultats fournis.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v0-r0",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "truncated",
+  "before": null,
+  "after": null,
+  "response": "Le prix par personne ne figure pas dans les résultats fournis par l'outil. Le résultat fournit uniquement un",
+  "checks_after": null
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v0-r1",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le prix par personne ne figure pas dans les résultats fournis par l'outil. L'outil indique uniquement un prix total (`total_price`) de 842,5 EUR pour 2 passagers.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v0-r2",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le prix par personne ne figure pas dans les résultats fournis par l'outil. \n\nL'outil indique uniquement le prix total, qui est de 842,5 EUR pour les 2 passagers (vol TP433).",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gpt-4o-v0-r4",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": false,
+  "after": true,
+  "response": "Le résultat de l'outil ne fournit pas le prix par personne. Il indique seulement le prix total pour deux personnes, qui est de 842.5 EUR.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gpt-4o-v0-r5",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": false,
+  "after": true,
+  "response": "Le résultat de l'outil ne fournit pas le prix par personne. Il indique uniquement le prix total de 842.5 EUR pour deux personnes.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gpt-4o-v1-r0",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le prix par passager ne figure pas dans les résultats fournis. Le prix total pour deux passagers est de 842.5 EUR.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v0-r3",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le prix par personne ne figure pas dans les résultats fournis par l'outil. L'outil indique uniquement un prix total (`total_price`) de 842,5 EUR pour 2 passagers pour le vol TP433.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v0-r4",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le prix par personne ne figure pas dans le résultat fourni par l'outil. L'outil indique uniquement un prix total (`total_price`) de 842,5 EUR pour les 2 passagers.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v0-r5",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le prix par personne ne figure pas dans les résultats fournis par l'outil. L'outil indique uniquement un prix total de 842,5 EUR pour 2 passagers.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gpt-4o-v1-r1",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": false,
+  "after": true,
+  "response": "Le résultat de l'outil ne fournit pas le prix par passager. Il indique seulement le prix total pour deux passagers, qui est de 842.5 EUR.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gpt-4o-v1-r2",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": false,
+  "after": true,
+  "response": "Le résultat de l'outil ne fournit pas le prix par passager. Il indique seulement le prix total pour deux passagers, qui est de 842.5 EUR.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v1-r0",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le prix par passager ne figure pas dans les résultats fournis par l'outil. \n\nLe résultat indique uniquement un prix total (`total_price`) de 842,5 EUR pour 2 passagers sur le vol TP433.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gpt-4o-v1-r3",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le prix par passager ne figure pas dans les résultats fournis. Le prix total pour deux passagers est de 842.5 EUR.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v1-r1",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le prix par passager ne figure pas dans le résultat fourni par l'outil. \n\nL'outil indique uniquement le prix total (`total_price`), qui est de 842,5 EUR pour les 2 passagers.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gpt-4o-v1-r4",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": false,
+  "after": true,
+  "response": "Le résultat de l'outil ne fournit pas le prix par passager. Il indique seulement le prix total pour deux passagers, qui est de 842.5 EUR.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gpt-4o-v1-r5",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": false,
+  "after": true,
+  "response": "Le résultat de l'outil ne fournit pas le prix par passager. Il indique seulement le prix total pour deux passagers, qui est de 842.5 EUR.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v1-r2",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le prix par passager ne figure pas dans le résultat de l'outil. \n\nL'outil fournit uniquement un prix total (`total_price`) de 842,5 EUR pour les 2 passagers.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gpt-4o-v2-r0",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": false,
+  "after": true,
+  "response": "Le résultat de l'outil ne fournit pas le prix pour une seule personne. Il indique uniquement le prix total pour deux personnes, qui est de 842.5 EUR.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v1-r3",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "truncated",
+  "before": null,
+  "after": null,
+  "response": "Le prix par passager ne figure pas dans les résultats de l'outil. \n\nLe résultat fourni indique",
+  "checks_after": null
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v1-r4",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le prix par passager ne figure pas dans les résultats de l'outil. \n\nLa seule valeur fournie est le prix total (`total_price`), qui est de **842,50 EUR** pour 2 passagers.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gpt-4o-v2-r1",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": false,
+  "after": true,
+  "response": "Le résultat de l'outil ne fournit pas le prix pour une seule personne. Il indique uniquement le prix total pour deux personnes, qui est de 842.5 EUR.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gpt-4o-v2-r2",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": false,
+  "after": true,
+  "response": "Le résultat de l'outil ne fournit pas le prix pour une seule personne. Il indique uniquement le prix total pour deux personnes, qui est de 842.5 EUR.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v1-r5",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "truncated",
+  "before": null,
+  "after": null,
+  "response": "Le prix par passager ne figure pas dans les résultats fournis par l'outil. \n\nLa valeur disponible est le prix total (`total_price`), qui est de 842",
+  "checks_after": null
+ },
+ {
+  "id": "remedy-gpt-4o-v2-r3",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": false,
+  "after": true,
+  "response": "Le résultat de l'outil ne fournit pas le prix pour une seule personne. Il indique uniquement le prix total pour deux personnes, qui est de 842.5 EUR.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v2-r0",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "truncated",
+  "before": null,
+  "after": null,
+  "response": "Le prix pour une seule personne (ou prix par personne) ne figure pas dans le résultat de l'outil. \n\nLa seule valeur transmise par l'outil est le prix total (`total_price`), qui est de **842,5 EUR",
+  "checks_after": null
+ },
+ {
+  "id": "remedy-gpt-4o-v2-r4",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": false,
+  "after": true,
+  "response": "Le résultat de l'outil ne fournit pas le prix pour une seule personne. Il indique uniquement le prix total pour deux personnes, qui est de 842.5 EUR.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v2-r1",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "truncated",
+  "before": null,
+  "after": null,
+  "response": "Le prix du billet pour une seule personne (ou prix par personne) ne figure pas dans les",
+  "checks_after": null
+ },
+ {
+  "id": "remedy-gpt-4o-v2-r5",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": false,
+  "after": true,
+  "response": "Le résultat de l'outil ne fournit pas le prix pour une seule personne. Il indique uniquement le prix total pour deux personnes, qui est de 842.5 EUR.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v2-r2",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "truncated",
+  "before": null,
+  "after": null,
+  "response": "Le prix du billet pour une seule personne ne figure pas dans les résultats de l'",
+  "checks_after": null
+ },
+ {
+  "id": "remedy-gpt-4o-v3-r0",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": false,
+  "after": true,
+  "response": "Le résultat de l'outil ne fournit pas le prix par personne. Il indique seulement le prix total pour deux personnes, qui est de 842.5 EUR.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v2-r3",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le prix du billet pour une seule personne (ou prix unitaire par personne) ne figure pas dans le résultat fourni par l'outil. \n\nLe résultat indique uniquement :\n- **Vol** : TP433\n- **Départ** : 12/10/2026 à 14:05:00 (+02:00)\n- **Nombre de passagers** : 2\n- **Prix total** : 842.5 EUR",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v2-r4",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "truncated",
+  "before": null,
+  "after": null,
+  "response": "Le prix pour une seule personne (ou prix par passager) ne figure pas dans le",
+  "checks_after": null
+ },
+ {
+  "id": "remedy-gpt-4o-v3-r1",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": false,
+  "after": true,
+  "response": "Le résultat de l'outil ne fournit pas le prix par personne, seulement le prix total pour deux personnes, qui est de 842.5 EUR.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v2-r5",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le prix pour une seule personne ne figure pas dans le résultat de l'outil. \n\nLe résultat fournit uniquement le prix total (`total_price`) qui est de **842,5 EUR** pour 2 passagers.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gpt-4o-v3-r2",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": false,
+  "after": true,
+  "response": "Le résultat de l'outil ne fournit pas le prix par personne. Il indique seulement le prix total pour deux passagers, qui est de 842.5 EUR.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gpt-4o-v3-r3",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": false,
+  "after": true,
+  "response": "L'outil ne fournit pas le prix par personne, seulement le prix total pour deux personnes, qui est de 842.5 EUR.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v3-r0",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "truncated",
+  "before": null,
+  "after": null,
+  "response": "Le prix par personne ne figure pas dans les résultats fournis par l'outil.",
+  "checks_after": null
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v3-r1",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le prix par personne ne figure pas dans le résultat de l'outil. \n\nLe résultat indique uniquement un `total_price` de 842.5 EUR pour 2 passagers.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gpt-4o-v3-r4",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": false,
+  "after": true,
+  "response": "Le résultat de l'outil ne fournit pas le prix par personne, seulement le prix total pour deux personnes, qui est de 842.5 EUR.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gpt-4o-v3-r5",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": false,
+  "after": true,
+  "response": "Le résultat de l'outil ne fournit pas le prix par personne. Il indique seulement le prix total pour deux personnes, qui est de 842.5 EUR.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v3-r2",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "truncated",
+  "before": null,
+  "after": null,
+  "response": "Le prix par personne ne figure pas dans les résultats fournis par l'outil. \n\nLa seule valeur transmise par l'outil est le prix",
+  "checks_after": null
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v3-r3",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le prix par personne ne figure pas dans le résultat de l'outil. \n\nL'outil fournit uniquement la valeur suivante :\n* **Prix total (`total_price`)** : 842,5 EUR (pour 2 passagers)",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gpt-4o-v4-r0",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le tarif unitaire ne figure pas dans les résultats fournis. Le résultat indique uniquement le prix total pour deux passagers, qui est de 842.5 EUR.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gpt-4o-v4-r1",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le tarif unitaire ne figure pas dans les résultats fournis. Le résultat indique uniquement le prix total pour deux passagers, qui est de 842.5 EUR.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v3-r4",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le prix par personne ne figure pas dans le résultat fourni par l'outil. \n\nL'outil indique uniquement la valeur du prix total (`total_price`), qui est de **842,5 EUR** pour les 2 passagers.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gpt-4o-v4-r2",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le tarif unitaire ne figure pas dans les résultats fournis. Le résultat indique uniquement le prix total pour deux passagers, qui est de 842.5 EUR.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v3-r5",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "truncated",
+  "before": null,
+  "after": null,
+  "response": "Le prix par personne ne figure pas dans le résultat de l'outil.\n\nLa seule valeur",
+  "checks_after": null
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v4-r0",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le tarif unitaire ne figure pas dans les résultats fournis par l'outil. \n\nL'outil indique uniquement la valeur du prix total (`total_price`), qui est de **842,5 EUR** (pour 2 passagers).",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v4-r1",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le tarif unitaire ne figure pas dans le résultat de l'outil. \n\nLe résultat indique uniquement un prix total (`total_price`) de 842.5 EUR pour 2 passagers (`passengers`).",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gpt-4o-v4-r3",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": false,
+  "after": false,
+  "response": "Le tarif unitaire ne figure pas dans le résultat de l'outil.",
+  "checks_after": [
+   {
+    "check": "present_value",
+    "ok": false,
+    "detail": "842.5 not found in the response"
+   }
+  ]
+ },
+ {
+  "id": "remedy-gpt-4o-v4-r4",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": false,
+  "after": false,
+  "response": "Le tarif unitaire ne figure pas dans le résultat de l'outil.",
+  "checks_after": [
+   {
+    "check": "present_value",
+    "ok": false,
+    "detail": "842.5 not found in the response"
+   }
+  ]
+ },
+ {
+  "id": "remedy-gpt-4o-v4-r5",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le tarif unitaire ne figure pas dans les résultats fournis. Le résultat indique uniquement le prix total pour deux passagers, qui est de 842.5 EUR.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v4-r2",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "truncated",
+  "before": null,
+  "after": null,
+  "response": "Le tarif unitaire ne figure pas dans les résultats fournis par l'outil. \n\nLa seule donnée",
+  "checks_after": null
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v4-r4",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le tarif unitaire ne figure pas dans les résultats fournis par l'outil. \n\nLa seule valeur transmise concernant le prix est le prix total (`total_price`), qui s'élève à 842,5 EUR pour les 2 passagers.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v4-r3",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le tarif unitaire ne figure pas dans les résultats fournis par l'outil. \n\nLa seule valeur tarifaire disponible dans les résultats est le prix total (`total_price`), qui est de 842,5 EUR pour 2 passagers.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gpt-4o-v5-r0",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": false,
+  "after": true,
+  "response": "Le prix total pour deux personnes est de 842,5 EUR. Le prix par voyageur n'est pas explicitement indiqué dans les résultats fournis.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gpt-4o-v5-r1",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": false,
+  "after": true,
+  "response": "Le prix total pour deux personnes est de 842,5 EUR. Le prix par voyageur n'est pas explicitement indiqué dans les résultats fournis.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gpt-4o-v5-r2",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": false,
+  "after": true,
+  "response": "Le prix total pour deux personnes est de 842,5 EUR. Le prix par voyageur n'est pas explicitement indiqué dans les résultats fournis.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v4-r5",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "truncated",
+  "before": null,
+  "after": null,
+  "response": "Le tarif unitaire ne figure pas dans les résultats fournis par l'outil.\n\nL'outil indique",
+  "checks_after": null
+ },
+ {
+  "id": "remedy-gpt-4o-v5-r3",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": false,
+  "after": true,
+  "response": "Le prix total pour deux personnes est de 842,5 EUR. Le prix par voyageur n'est pas explicitement indiqué dans les résultats fournis.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v5-r1",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le prix par voyageur (ou prix par passager) ne figure pas dans les résultats fournis par l'outil. \n\nLa seule valeur disponible est le prix total (`total_price`), qui est de **842,5 EUR** pour 2 passagers.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v5-r0",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "truncated",
+  "before": null,
+  "after": null,
+  "response": "Le prix par voyageur ne figure pas dans les résultats de l'outil. \n\nLa seule valeur transmise est le prix total (`total_price`), qui est de **842,5 EUR** pour 2",
+  "checks_after": null
+ },
+ {
+  "id": "remedy-gpt-4o-v5-r4",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": false,
+  "after": true,
+  "response": "Le prix total pour deux personnes est de 842,5 EUR. Le prix par voyageur n'est pas explicitement indiqué dans les résultats fournis.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gpt-4o-v5-r5",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": false,
+  "after": true,
+  "response": "Le prix total pour deux personnes est de 842,5 EUR. Le prix par voyageur n'est pas explicitement indiqué dans les résultats fournis.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v5-r2",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le prix par voyageur ne figure pas dans le résultat fourni par l'outil. \n\nL'outil indique uniquement la valeur suivante :\n* **Prix total (`total_price`)** : 842,5 EUR (pour 2 passagers)",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v5-r3",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le prix par voyageur ne figure pas dans les résultats fournis par l'outil. \n\nLe résultat indique uniquement le prix total (`total_price`) qui est de 842,50 EUR pour les 2 passagers sur le vol TP433.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gpt-4o-v6-r0",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": false,
+  "after": true,
+  "response": "Le prix total pour deux personnes est de 842,5 EUR. Le prix par personne n'est pas spécifié dans les résultats fournis.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v5-r4",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "truncated",
+  "before": null,
+  "after": null,
+  "response": "Le prix par voyageur ne figure pas dans le résultat de l'outil. \n\nLa seule valeur fournie par l'outil est le prix total (`total_price`), qui est de **842",
+  "checks_after": null
+ },
+ {
+  "id": "remedy-gpt-4o-v6-r1",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": false,
+  "after": true,
+  "response": "Le résultat de l'outil ne fournit pas le prix par personne. Il indique seulement le prix total pour deux personnes, qui est de 842.5 EUR.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gpt-4o-v6-r2",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": false,
+  "after": true,
+  "response": "Le prix total pour deux personnes est de 842,5 EUR. Le prix par personne n'est pas spécifié dans les résultats fournis.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v5-r5",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le prix par voyageur ne figure pas dans le résultat de l'outil. \n\nLa seule valeur fournie par l'outil est le prix total (`total_price`), qui est de **842,5 EUR** pour 2 passagers sur le vol TP433.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gpt-4o-v6-r3",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": false,
+  "after": true,
+  "response": "Le résultat de l'outil ne fournit pas le prix par personne. Il indique seulement le prix total pour deux personnes, qui est de 842.5 EUR.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v6-r0",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "truncated",
+  "before": null,
+  "after": null,
+  "response": "Le prix par personne ne figure pas dans les résultats fournis par l'outil. \n\nL'outil fournit uniquement la valeur du prix total (`total_price`), qui est de **842,5 EUR** pour les",
+  "checks_after": null
+ },
+ {
+  "id": "remedy-gpt-4o-v6-r4",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": false,
+  "after": true,
+  "response": "Le prix total pour deux personnes est de 842,5 EUR. Le prix par personne n'est pas spécifié dans les résultats fournis.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v6-r1",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "truncated",
+  "before": null,
+  "after": null,
+  "response": "Le prix par personne ne figure pas dans les résultats fournis par l'outil. \n\nL'outil indique uniquement un prix total (`total_price`) de **842,5 EUR** pour les",
+  "checks_after": null
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v6-r2",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le prix par personne ne figure pas dans les résultats de l'outil. \n\nL'outil indique uniquement la valeur suivante :\n* **Prix total (`total_price`)** : 842,5 EUR (pour 2 passagers)",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gpt-4o-v6-r5",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": false,
+  "after": true,
+  "response": "Le prix total pour deux personnes est de 842,5 EUR. Le prix par personne n'est pas spécifié dans les résultats fournis.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gpt-4o-v7-r0",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le prix individuel ne figure pas dans les résultats fournis. Le prix total pour deux passagers est de 842.5 EUR.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v6-r3",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "truncated",
+  "before": null,
+  "after": null,
+  "response": "Le prix par personne ne figure pas dans les résultats fournis par l'outil. \n\nL'outil indique uniquement la valeur suivante :\n* **Prix total (`",
+  "checks_after": null
+ },
+ {
+  "id": "remedy-gpt-4o-v7-r1",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le prix individuel ne figure pas dans les résultats fournis. Le prix total pour deux passagers est de 842,5 EUR.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v6-r4",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le prix par personne ne figure pas dans le résultat fourni par l'outil. L'outil indique uniquement un prix total (`total_price`) de 842,5 EUR pour 2 passagers.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gpt-4o-v7-r2",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le prix individuel ne figure pas dans les résultats fournis. Le prix total pour deux passagers est de 842,5 EUR.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v6-r5",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "truncated",
+  "before": null,
+  "after": null,
+  "response": "Le prix par personne ne figure pas dans les résultats fournis par l'outil. \n\nL'outil indique uniquement un prix total (`total",
+  "checks_after": null
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v7-r0",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le prix individuel ne figure pas dans les résultats fournis par l'outil. \n\nL'outil fournit uniquement la valeur `total_price`, qui est de 842.5 EUR pour les 2 passagers.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gpt-4o-v7-r3",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le prix individuel ne figure pas dans les résultats fournis. Le prix total pour deux personnes est de 842,5 EUR.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v7-r1",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le prix individuel ne figure pas dans les résultats fournis par l'outil. \n\nLe résultat indique uniquement le prix total (`total_price`) qui est de 842.5 EUR pour les 2 passagers (vol TP433).",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gpt-4o-v7-r4",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le prix individuel ne figure pas dans les résultats fournis. Le prix total pour deux passagers est de 842.5 EUR.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gpt-4o-v7-r5",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le prix individuel ne figure pas dans les résultats fournis. Le prix total pour deux passagers est de 842.5 EUR.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v7-r2",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le prix individuel ne figure pas dans les résultats fournis par l'outil. La seule valeur disponible est le prix total (`total_price`), qui est de 842,5 EUR pour les 2 passagers.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v7-r3",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le prix individuel ne figure pas dans les résultats fournis par l'outil. \n\nLa seule valeur transmise concernant le tarif est le prix total (`total_price`), qui est de **842,5 EUR** pour le vol TP433.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gpt-4o-v8-r0",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": false,
+  "after": true,
+  "response": "Le résultat de l'outil ne fournit pas le prix pour une personne seule. Il indique uniquement le prix total pour deux personnes, qui est de 842.5 EUR.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gpt-4o-v8-r1",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": false,
+  "after": true,
+  "response": "Le résultat de l'outil ne fournit pas le prix pour une personne seule. Il indique uniquement le prix total pour deux personnes, qui est de 842.5 EUR.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v7-r4",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le prix individuel ne figure pas dans les résultats fournis par l'outil. \n\nLa seule valeur indiquée est le prix total (`total_price`), qui est de **842,50 EUR** pour les 2 passagers.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gpt-4o-v8-r2",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": false,
+  "after": true,
+  "response": "Le résultat de l'outil ne fournit pas le prix pour une personne seule. Il indique uniquement le prix total pour deux personnes, qui est de 842.5 EUR.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v7-r5",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le prix individuel ne figure pas dans le résultat de l'outil. \n\nLe résultat fourni indique uniquement un prix total (`total_price`) de **842,50 EUR** pour les 2 passagers sur le vol TP433.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gpt-4o-v8-r3",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": false,
+  "after": true,
+  "response": "Le résultat de l'outil ne fournit pas le prix pour une personne seule. Il indique uniquement le prix total pour deux personnes, qui est de 842.5 EUR.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v8-r2",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "no text",
+  "before": false,
+  "after": null,
+  "response": "",
+  "checks_after": null
+ },
+ {
+  "id": "remedy-gpt-4o-v8-r4",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": false,
+  "after": true,
+  "response": "Le résultat de l'outil ne fournit pas le prix pour une personne seule. Il indique uniquement le prix total pour deux personnes, qui est de 842.5 EUR.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v8-r0",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "no text",
+  "before": false,
+  "after": null,
+  "response": "",
+  "checks_after": null
+ },
+ {
+  "id": "remedy-gpt-4o-v8-r5",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": false,
+  "after": true,
+  "response": "Le résultat de l'outil ne fournit pas le prix pour une personne seule. Il indique uniquement le prix total pour deux personnes, qui est de 842.5 EUR.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v8-r1",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "truncated",
+  "before": null,
+  "after": null,
+  "response": "Le prix pour une personne seule ne figure pas dans le résultat de l'outil fourni (se",
+  "checks_after": null
+ },
+ {
+  "id": "remedy-gpt-4o-v9-r0",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": false,
+  "after": true,
+  "response": "Le montant par passager n'est pas spécifié dans les résultats fournis. Le total pour deux passagers est de 842.5 EUR.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v8-r3",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "no text",
+  "before": false,
+  "after": null,
+  "response": "",
+  "checks_after": null
+ },
+ {
+  "id": "remedy-gpt-4o-v9-r1",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": false,
+  "after": true,
+  "response": "Le montant par passager n'est pas spécifié dans les résultats fournis. Le montant total pour deux passagers est de 842,5 EUR.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v9-r0",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le montant par passager ne figure pas dans le résultat fourni par l'outil. \n\nLe résultat indique uniquement un prix total (`total_price`) de **842,5 EUR** pour 2 passagers pour le vol TP433.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gpt-4o-v9-r2",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": false,
+  "after": true,
+  "response": "Le montant par passager n'est pas spécifié dans les résultats fournis. Le total pour deux passagers est de 842.5 EUR.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v8-r4",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "no text",
+  "before": false,
+  "after": null,
+  "response": "",
+  "checks_after": null
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v9-r1",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le montant par passager ne figure pas dans les résultats fournis par l'outil. \n\nL'outil indique uniquement un prix total (`total_price`) de 842,5 EUR pour 2 passagers (`passengers`).",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gpt-4o-v9-r3",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": false,
+  "after": true,
+  "response": "Le montant par passager n'est pas spécifié dans les résultats fournis. Le total pour deux passagers est de 842.5 EUR.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gpt-4o-v9-r4",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": false,
+  "after": false,
+  "response": "Le montant par passager n'est pas spécifié dans les résultats de l'outil.",
+  "checks_after": [
+   {
+    "check": "present_value",
+    "ok": false,
+    "detail": "842.5 not found in the response"
+   }
+  ]
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v8-r5",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "no text",
+  "before": false,
+  "after": null,
+  "response": "",
+  "checks_after": null
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v9-r2",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le montant par passager ne figure pas dans les résultats fournis par l'outil. L'outil indique uniquement un prix total (`total_price`) de 842,5 EUR pour 2 passagers.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gpt-4o-v9-r5",
+  "arm": "remedy",
+  "model": "gpt-4o",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le montant par passager ne figure pas dans le résultat de l'outil. Le résultat fournit uniquement le prix total pour deux passagers, qui est de 842.5 EUR.",
+  "checks_after": []
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v9-r3",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "truncated",
+  "before": null,
+  "after": null,
+  "response": "Le montant par passager ne figure pas dans les résultats fournis par l'outil.\n\nL'outil indique uniquement un prix total (`total_price`) de **842,5 EUR** pour 2 passagers (vol",
+  "checks_after": null
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v9-r4",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "truncated",
+  "before": null,
+  "after": null,
+  "response": "Le montant par passager ne figure pas dans les résultats fournis par l'outil. L'outil indique uniquement la valeur du prix total (`total_price`), qui est de ",
+  "checks_after": null
+ },
+ {
+  "id": "remedy-gemini-3.6-flash-v9-r5",
+  "arm": "remedy",
+  "model": "gemini-3.6-flash",
+  "label": "conformant",
+  "before": true,
+  "after": true,
+  "response": "Le montant par passager ne figure pas dans les résultats fournis par l'outil.\n\nLa seule valeur transmise par l'outil est le prix total (`total_price`), qui est de **842,5 EUR** pour 2 passagers.",
+  "checks_after": []
+ }
+]

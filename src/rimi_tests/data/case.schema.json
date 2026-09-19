@@ -307,7 +307,13 @@
               "subject": {
                 "type": "string",
                 "minLength": 1
-              }
+              },
+          "subject_synonyms": {
+            "type": "array",
+            "description": "Other words the answer may use for the same subject, declared by the case.",
+            "items": { "type": "string", "minLength": 1 },
+            "minItems": 1
+          }
             }
           }
         },

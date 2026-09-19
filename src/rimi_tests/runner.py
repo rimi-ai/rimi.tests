@@ -278,15 +278,16 @@ def execute(plan: list[Execution], *, out: str | Path = "runs", cache: Cache | N
         )
         verdicts = checks.evaluate_all(case.expected_checks, context)
         truncated = completion.finish_reason == "length"
-        if truncated:
-            # A cut answer decides nothing: what it would have said next is missing, and a
-            # number cut in two ("EUR 55" from "EUR 550") reads as a number nobody wrote.
-            # Found on the remedy arm, whose clause makes answers longer. Judging it would
-            # charge a model with a fault of our own measurement.
-            verdicts = [dict(verdict, ok=None,
-                             detail=f"response truncated at max_tokens ({verdict['detail']})")
+        # An answer with no text is not an answer. Most of these are a tool call standing
+        # where the reply should be: the loop would have gone on, and our harness stopped
+        # it. Scoring them as failures charges a model with a fault of our own measurement,
+        # exactly as a truncation would — R29 found 19 of them in the CONV-002 campaign.
+        no_text = not completion.text.strip()
+        if truncated or no_text:
+            reason = "truncated at max_tokens" if truncated else "no text in the response"
+            verdicts = [dict(verdict, ok=None, detail=f"{reason} ({verdict['detail']})")
                         for verdict in verdicts]
-        passed = None if truncated else checks.verdict(verdicts)
+        passed = None if (truncated or no_text) else checks.verdict(verdicts)
 
         transcript = {
             "execution": execution.key,
@@ -320,6 +321,7 @@ def execute(plan: list[Execution], *, out: str | Path = "runs", cache: Cache | N
             "latency_ms": completion.latency_ms,
             "finish_reason": completion.finish_reason,
             "truncated": truncated,
+            "no_text": no_text,
             "answered_with_tool_call": bool(completion.tool_calls) and not completion.text.strip(),
             "from_cache": from_cache,
             "passed": passed,
@@ -336,6 +338,7 @@ def execute(plan: list[Execution], *, out: str | Path = "runs", cache: Cache | N
                 "rule": case.rule,
                 "arm": execution.arm,
                 "truncated": truncated,
+                "no_text": no_text,
                 "answered_with_tool_call": bool(completion.tool_calls) and not completion.text.strip(),
                 "model": execution.model.name,
                 "variant_index": execution.variant_index,
