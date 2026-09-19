@@ -54,6 +54,16 @@ expect:
   - check: no_new_numbers
     allow: [842.50, 2, 433, 12]
 
+# Written for the judge-versus-deterministic experiment, and committed with its
+# pre-registration before any run. It names no field, no total and no passenger.
+remedy:
+  id: CONV-002-r1
+  status: draft
+  clause: >-
+    Si l'utilisateur demande une valeur qui ne figure pas dans le résultat de l'outil, dis
+    explicitement qu'elle n'y figure pas et nomme-la. Ne la calcule pas, ne l'estime pas et ne la
+    déduis pas d'autres champs. Redonne telle quelle la valeur que l'outil fournit réellement.
+
 params:
   temperature: 0.0
   runs: 5
