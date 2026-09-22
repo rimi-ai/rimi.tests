@@ -1,7 +1,7 @@
 # Coverage — which rules have test cases, which can have them, and in what order
 
-One line per rule of the convention: 35 in Part A, 11 in Part B, 20 in Part C. The principles are
-listed separately and carry no testability letter — a principle is not tested, the rules derived from
+One line per rule of [the convention at v0.3.1](https://github.com/rimi-ai/rimi.convention/blob/v0.3.1/en.md):
+35 in Part A, 11 in Part B, 20 in Part C. The principles are listed separately and carry no testability letter — a principle is not tested, the rules derived from
 it are.
 
 **Testability**
